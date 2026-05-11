@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthcare Equipment Services | Solutechh</title>
+  <meta name="description" content="Solutechh provides CSSD systems, modular operation theatres, skill labs, pneumatic tube systems, bio waste management, and cadaver lab solutions for Indian hospitals.">
+  <link rel="canonical" href="https://solutechh.com/services.html">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://solutechh.com/services.html">
+  <meta property="og:title" content="Healthcare Equipment Services | Solutechh">
+  <meta property="og:image" content="https://solutechh.com/assets/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://solutechh.com/assets/og-image.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/index.html" class="logo-container">
+    <img src="/assets/logoSolu.jpeg" alt="Solutechh — Medical Equipment Supply India" class="logo-img" width="70" height="70">
+    <div class="logo-text">
+      <h2>SOLUTECHH</h2>
+      <p>Advance Healthcare Solutions Provider</p>
+    </div>
+  </a>
+
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="nav-wrapper" id="navWrapper">
+    <button class="nav-close-btn" id="navCloseBtn" aria-label="Close menu">
+      <i class="fa-solid fa-times" aria-hidden="true"></i>
+    </button>
+    <nav aria-label="Main navigation">
+      <ul class="nav-list">
+        <li><a href="/index.html"        class="nav-link "         >Home</a></li>
+        <li><a href="/products.html"     class="nav-link "     >Products</a></li>
+        <li><a href="/services.html"     class="nav-link active" aria-current="page"     >Services</a></li>
+        <li><a href="/about.html"        class="nav-link "        >About Us</a></li>
+        <li><a href="/achievements.html" class="nav-link " >Achievements</a></li>
+        <li><a href="/contact.html"      class="nav-link "      >Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Hamburger menu toggle — minimal JS, only for UX
+  (function() {
+    var btn     = document.getElementById('menuBtn');
+    var wrapper = document.getElementById('navWrapper');
+    var close   = document.getElementById('navCloseBtn');
+    if (!btn) return;
+    btn.addEventListener('click', function() {
+      var open = wrapper.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open);
+    });
+    if (close) close.addEventListener('click', function() {
+      wrapper.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+  })();
+</script>
+
+
+<main>
+
+  <div class="page-hero with-bg" style="background-image: linear-gradient(135deg, rgba(29,185,174,0.75), rgba(18,123,115,0.75)), url('/assets/service_bg.jpeg');">
+    <div class="page-hero-content">
+      <h1>Our Services</h1>
+      <p>We Provide Advanced Healthcare Infrastructure Solutions</p>
+    </div>
+  </div>
+
+  <section class="services-page-section">
+    <div class="container">
+      <div class="section-header"><h2>Healthcare Solutions</h2></div>
+      <div class="services-cards-grid">
+
+        <a href="/services/cssd.html" class="service-img-card">
+          <img src="https://www.bbraun.com.au/adobe/dynamicmedia/deliver/dm-aid--6691ce89-3c22-420a-82e4-2a053b34ce89/central-sterile-supply-department-cssd-employee-with-containers-16-9.jpg?preferwebp=true&quality=100"
+               alt="CSSD Central Sterile Supply Department" width="800" height="450" loading="lazy">
+          <div class="service-img-card-content">
+            <h3>CSSD</h3>
+            <p>The CSSD is a vital unit in a hospital responsible for the cleaning, sterilization, and distribution of all surgical instruments, medical devices, and supplies.</p>
+          </div>
+        </a>
+
+        <a href="/services/modular.html" class="service-img-card">
+          <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=800&q=80"
+               alt="Modular Operation Theatre surgical room" width="800" height="450" loading="lazy">
+          <div class="service-img-card-content">
+            <h3>Modular Operation Theatre</h3>
+            <p>Modular Operating Theatres are state-of-the-art surgical environments designed to provide maximum safety, efficiency, and flexibility.</p>
+          </div>
+        </a>
+
+        <a href="/services/skill-labs.html" class="service-img-card">
+          <img src="https://www.lakeheadu.ca/sites/default/files/uploads/86/photos/Copy%20of%20LU_Nursing-056.png"
+               alt="Medical skill lab training facility" width="800" height="450" loading="lazy">
+          <div class="service-img-card-content">
+            <h3>Skill Lab</h3>
+            <p>Skill Labs provide a modern, hands-on training environment for medical professionals and students.</p>
+          </div>
+        </a>
+
+        <a href="/services/pneumatic.html" class="service-img-card">
+          <img src="https://www.air-log.com/files/images/de/anwendungen/krankenhaus/rohrpost-kompaktstation-versand-rohrpostbuechse.jpg"
+               alt="Pneumatic tube system hospital transport" width="800" height="450" loading="lazy">
+          <div class="service-img-card-content">
+            <h3>Pneumatic Tube System</h3>
+            <p>Pneumatic Tube Systems are advanced transport solutions designed to move samples, medicines, and documents quickly and safely.</p>
+          </div>
+        </a>
+
+        <div class="service-img-card" style="cursor:default">
+          <img src="https://blog.geoexams.com/wp-content/uploads/2025/03/Hospital-waste-management.webp"
+               alt="Bio waste management hospital facility" width="800" height="450" loading="lazy">
+          <div class="service-img-card-content">
+            <h3>Bio Waste Management</h3>
+            <p>Solutechh's Bio Waste Management System ensures safe, efficient, and compliant disposal of biomedical waste in healthcare facilities.</p>
+          </div>
+        </div>
+
+        <div class="service-img-card" style="cursor:default">
+          <img src="https://turnerxray.com/wp-content/uploads/2025/05/best-practices-featured.jpg"
+               alt="Cadaver lab and turnkey medical solutions" width="800" height="450" loading="lazy">
+          <div class="service-img-card-content">
+            <h3>Cadaver Lab &amp; Turnkey Solutions</h3>
+            <p>Solutechh provides complete Cadaver Lab turnkey solutions designed to support advanced medical education, surgical training, and research.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="/assets/solutechh.png" alt="Solutechh logo" width="40" height="40" loading="lazy">
+          <span>SOLUTECHH</span>
+        </div>
+        <p>Medical equipment supply, installation &amp; maintenance for hospitals and institutions across India.</p>
+      </div>
+
+      <div class="footer-col">
+        <h5>Services</h5>
+        <a href="/services/cssd.html">CSSD Systems</a>
+        <a href="/services/modular.html">Modular OT</a>
+        <a href="/services/skill-labs.html">Skill Labs</a>
+        <a href="/services/pneumatic.html">Pneumatic Systems</a>
+      </div>
+
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="/index.html">Home</a>
+        <a href="/about.html">About Us</a>
+        <a href="/products.html">Products</a>
+        <a href="/achievements.html">Achievements</a>
+      </div>
+
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a href="mailto:solutechh@gmail.com">solutechh@gmail.com</a>
+        <a href="tel:+918879469955">+91 8879469955</a>
+        <span>C-412, Damji Shamji Corporate Square,<br>Ghatkopar East, Mumbai 400075</span>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="footerYear">2026</span> Solutechh. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
+</script>
+
+
+</body>
+</html>
