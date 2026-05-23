@@ -1,0 +1,24 @@
+# Solutechh Website Robots.txt
+# Allow all crawlers for maximum SEO
+
+User-agent: *
+Allow: /
+Disallow: /assets/private/
+Disallow: *.pdf
+Disallow: *.doc
+Disallow: *.docx
+
+# Sitemap location
+Sitemap: https://solutechh.com/sitemap.xml
+
+# Crawl delay (optional - adjust if server is slow)
+Crawl-delay: 1
+
+# Specific crawler rules for performance
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
