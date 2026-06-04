@@ -1168,3 +1168,101 @@ button:focus-visible, a:focus-visible {
   margin-bottom: 1rem;
   font-size: 0.875rem;
 }
+
+/* =========================================
+   FOUNDERS SECTION
+========================================= */
+.founders-section {
+  padding: 5rem 1.5rem;
+  background-color: #f8faff; /* Very soft blue/grey tint to separate it from white sections */
+}
+
+.founders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  max-width: 1000px; /* Wider to accommodate the longer text beautifully */
+  margin: 0 auto;
+}
+
+.founder-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%; /* Ensures both cards are exactly the same height */
+}
+
+.founder-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.founder-img-wrap {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  border: 5px solid #eef2f6;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+}
+
+.founder-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top; /* Centers on faces if images are tall */
+}
+
+.founder-info {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Pushes content evenly */
+}
+
+.founder-info h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.6rem;
+  color: #111;
+  margin-bottom: 0.25rem;
+}
+
+.founder-role {
+  color: #0056b3; /* Professional blue */
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #eef2f6;
+}
+
+.founder-bio {
+  text-align: left; /* Left-aligns long text for easier reading */
+  color: #444;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.founder-bio p {
+  margin-bottom: 1rem;
+}
+
+.founder-bio p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .founder-card {
+    padding: 2rem 1.5rem;
+  }
+}
