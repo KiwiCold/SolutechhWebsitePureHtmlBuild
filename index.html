@@ -53,6 +53,65 @@
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
   <link rel="stylesheet" href="/style.css">
   <noscript><link rel="stylesheet" href="/style.css"></noscript>
+
+  <!-- READ MORE STYLES -->
+  <style>
+    .read-more-btn {
+      background: transparent;
+      border: none;
+      color: #0056b3; /* Adjust to match your theme's primary color */
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0;
+      margin-top: 10px;
+      transition: color 0.3s ease;
+    }
+
+    .read-more-btn:hover {
+      color: #003d82;
+      text-decoration: underline;
+    }
+
+    .read-more-btn i {
+      transition: transform 0.3s ease;
+      font-size: 0.8rem;
+    }
+
+    /* Rotate icon when open */
+    .read-more-btn.open i {
+      transform: rotate(180deg);
+    }
+
+    /* Smooth expansion container */
+    .bio-more {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.4s ease-out;
+      overflow: hidden;
+    }
+
+    .bio-more.open {
+      grid-template-rows: 1fr;
+    }
+
+    .bio-more-inner {
+      min-height: 0;
+      opacity: 0;
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+      transform: translateY(-10px);
+    }
+
+    .bio-more.open .bio-more-inner {
+      opacity: 1;
+      transform: translateY(0);
+      padding-top: 12px;
+    }
+  </style>
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3RQZ0PBV8Z"></script>
@@ -217,8 +276,19 @@
           <p class="founder-role">Founder</p>
           <div class="founder-bio">
             <p>With 22+ years in healthcare, Kalpesh brings deep expertise in pharmaceutical and medical equipment sales & marketing. He holds a BSc in Zoology, a PG Diploma in Hotel Management, and a Diploma in Marketing Management—a mix of scientific grounding and commercial acumen that shapes his approach to business.</p>
-            <p>Kalpesh has led sales and marketing for leading healthcare companies, scaled teams, and delivered 30-40 training programs across his career focused on product knowledge and capability building.</p>
-            <p>Since founding Solutechh in 2016, he leads business development and strategic partnerships, working with hospitals to implement solutions that improve operational efficiency and patient care.</p>
+            
+            <!-- UPDATED READ MORE BUTTON -->
+            <button type="button" class="read-more-btn" onclick="toggleReadMore(this)">
+              <span>Read more</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="bio-more">
+              <div class="bio-more-inner">
+                <p>Kalpesh has led sales and marketing for leading healthcare companies, scaled teams, and delivered 30-40 training programs across his career focused on product knowledge and capability building.</p>
+                <p>Since founding Solutechh in 2016, he leads business development and strategic partnerships, working with hospitals to implement solutions that improve operational efficiency and patient care.</p>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -284,8 +354,20 @@
 
 <script>
   document.getElementById('footerYear').textContent = new Date().getFullYear();
-</script>
 
+  // CLEANED UP READ MORE SCRIPT
+  function toggleReadMore(btn) {
+    const content = btn.nextElementSibling;
+    const span = btn.querySelector('span');
+    
+    // Toggle active classes
+    const isOpen = btn.classList.toggle('open');
+    content.classList.toggle('open');
+    
+    // Update text
+    span.textContent = isOpen ? 'Read less' : 'Read more';
+  }
+</script>
 
 </body>
 </html>
