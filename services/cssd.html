@@ -22,6 +22,59 @@
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
   <link rel="stylesheet" href="/style.css">
   <noscript><link rel="stylesheet" href="/style.css"></noscript>
+
+  <!-- AMAZING VIDEO CSS ADDED HERE -->
+  <style>
+    .video-showcase {
+      padding: 4rem 1rem;
+      background: linear-gradient(180deg, #ffffff 0%, #f4f7f9 100%);
+      text-align: center;
+    }
+    .video-showcase h2 {
+      margin-bottom: 1rem;
+      color: #1a365d;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+    }
+    .video-showcase p {
+      margin-bottom: 3rem;
+      color: #555;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .video-container {
+      position: relative;
+      max-width: 900px; /* Adjust size as needed */
+      margin: 0 auto;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      border: 8px solid #ffffff;
+      background-color: #000;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .video-container:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.35);
+    }
+    .video-aspect-ratio {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* Perfect 16:9 Aspect Ratio */
+    }
+    .video-aspect-ratio video,
+    .video-aspect-ratio iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      object-fit: cover;
+    }
+  </style>
 </head>
 <body>
 
@@ -77,7 +130,6 @@
   })();
 </script>
 
-
 <main>
   <div class="service-detail-hero" style="background-image: url('/assets/cssd.jpeg');">
     <div class="service-detail-hero-content">
@@ -92,6 +144,27 @@
       <p>The Central Sterile Supply Department (CSSD) is a vital unit in hospitals responsible for cleaning, sterilizing, and distributing medical instruments. It ensures all equipment used in patient care is safe, sterile, and infection-free.</p>
     </div>
   </div>
+
+  <!-- AMAZING VIDEO SHOWCASE SECTION START -->
+  <div class="video-showcase">
+    <div class="container">
+      <h2>CSSD Installation Demo</h2>
+     
+      <div class="video-container">
+        <div class="video-aspect-ratio">
+         
+          <video controls poster="/assets/photo.jpg" preload="metadata">
+            <source src="/assets/VID-20260606-WA0102.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- AMAZING VIDEO SHOWCASE SECTION END -->
 
   <div class="sd-section">
     <div class="container">
@@ -172,6 +245,13 @@
       </div>
 
     </div>
+
+    <!-- UPDATED DISCLAIMER -->
+    <div class="footer-disclaimer">
+      <p><strong>Disclaimer:</strong> Solutechh is authorized to represent third-party products on this website on a case-by-case basis. Additionally, select products and associated software featured herein are indigenously manufactured and developed by Solutechh. Please note that projects and achievements showcased on this platform encompass both independent executions by Solutechh and collaborative endeavors undertaken alongside industry partners, contractors, or OEMs. Furthermore, all products and images shown on this website are strictly for representational and informational purposes only. Certain photographs and visuals have been sourced from OEM websites or third-party platforms solely to demonstrate product categories and capabilities, and we claim no ownership over such third-party intellectual property. Any commercial enquiry submitted through our website for any product will only be considered and processed subject to prior intimation and formal authorization from the respective Original Equipment Manufacturers (OEMs) or our parent companies.</p>
+    </div>
+    <!-- END OF DISCLAIMER -->
+
     <div class="footer-bottom">
       <p>&copy; <span id="footerYear">2026</span> Solutechh. All Rights Reserved.</p>
     </div>
