@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surgical Instrument Training Game | Solutechh</title>
+  <link rel="icon" type="image/jpg" href="/assets/LogoSolu.jpeg">
+  <meta name="robots" content="index, follow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/style.css">
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS — "Sterile Tray" system
+       Brand teal carried over from the parent site, extended with
+       a steel/instrument-tray neutral scale and CSSD indicator colors.
+       ============================================================ */
+    :root{
+      --ink:#0a2530;
+      --teal:#108fa0;
+      --teal-deep:#0d5066;
+      --teal-pale:#e3f3f5;
+
+      --steel-50:#f5f8f9;
+      --steel-100:#e9eff1;
+      --steel-200:#d9e3e6;
+      --steel-300:#c2d0d4;
+      --steel-600:#5f7882;
+      --steel-700:#3d535c;
+
+      --sterile:#1f9d55;
+      --sterile-text:#15803d;
+      --sterile-pale:#e3f7ea;
+
+      --alert:#d23d3d;
+      --alert-text:#b91c1c;
+      --alert-pale:#fdeaea;
+
+      --amber:#dd9a25;
+      --amber-text:#92660a;
+      --amber-pale:#fdf3e0;
+
+      --font-display:'Montserrat', sans-serif;
+      --font-body:'Open Sans', sans-serif;
+      --font-tag:'IBM Plex Mono', monospace;
+
+      --radius-tray:20px;
+      --shadow-tray:0 18px 50px -16px rgba(10,37,48,.28), 0 2px 8px rgba(10,37,48,.08);
+    }
+
+    @keyframes stampIn{ from{ transform:scale(0) rotate(-18deg); opacity:0; } to{ transform:scale(1) rotate(0); opacity:1; } }
+    @keyframes stageIn{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:translateY(0); } }
+    @keyframes screenIn{ from{ opacity:0; transform:translateY(6px); } to{ opacity:1; transform:translateY(0); } }
+    @keyframes popCorrect{ 0%{ transform:scale(1); } 45%{ transform:scale(1.035); } 100%{ transform:scale(1); } }
+    @keyframes shakeWrong{ 0%,100%{ transform:translateX(0); } 20%{ transform:translateX(-6px); } 40%{ transform:translateX(6px); } 60%{ transform:translateX(-4px); } 80%{ transform:translateX(4px); } }
+    @keyframes flashPulse{ 0%{ box-shadow:0 0 0 0 rgba(16,143,160,.45); } 100%{ box-shadow:0 0 0 9px rgba(16,143,160,0); } }
+    @keyframes dotPulse{ 0%,100%{ opacity:1; } 50%{ opacity:.35; } }
+    @keyframes shimmer{ from{ background-position:200% 0; } to{ background-position:-50% 0; } }
+
+    /* ========== PAGE SURFACE ========== */
+    main{
+      background:
+        radial-gradient(circle, rgba(13,80,102,.05) 1px, transparent 1.5px) 0 0/16px 16px,
+        var(--steel-50);
+    }
+
+    /* ========== HERO ========== */
+    .game-hero{
+      position:relative;
+      min-height:38vh;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 14% 18%, rgba(255,255,255,.10), transparent 42%),
+        radial-gradient(circle at 86% 82%, rgba(255,255,255,.07), transparent 46%),
+        linear-gradient(135deg, var(--teal) 0%, var(--teal-deep) 58%, var(--ink) 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      text-align:center;
+      padding:4rem 1.5rem 7rem;
+    }
+
+    .game-hero::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background-image:radial-gradient(circle, rgba(255,255,255,.16) 1px, transparent 1.5px);
+      background-size:16px 16px;
+      opacity:.45;
+      pointer-events:none;
+    }
+
+    .hero-inner{ position:relative; z-index:2; max-width:680px; }
+
+    .hero-eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:.55rem;
+      font-family:var(--font-tag);
+      font-size:.7rem;
+      font-weight:600;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.28);
+      padding:.4rem .95rem;
+      border-radius:30px;
+      margin-bottom:1.4rem;
+      color:rgba(255,255,255,.92);
+    }
+
+    .hero-eyebrow .dot{
+      width:6px; height:6px; border-radius:50%;
+      background:#5ee6a0;
+      box-shadow:0 0 0 3px rgba(94,230,160,.25);
+      animation:dotPulse 2s ease-in-out infinite;
+    }
+
+    .game-hero h1{
+      font-size:clamp(2rem, 5vw, 3.4rem);
+      font-weight:800;
+      margin-bottom:.85rem;
+      font-family:var(--font-display);
+      letter-spacing:-.01em;
+    }
+
+    .game-hero p{
+      font-size:clamp(1rem, 2vw, 1.15rem);
+      color:rgba(255,255,255,.86);
+      max-width:600px;
+      margin:0 auto 2rem;
+      line-height:1.65;
+    }
+
+    .hero-icons{ display:flex; align-items:center; justify-content:center; gap:1.1rem; }
+    .hero-icons svg{ width:26px; height:26px; color:rgba(255,255,255,.78); }
+    .hero-icon-dot{ width:4px; height:4px; border-radius:50%; background:rgba(255,255,255,.4); }
+
+    /* ========== GAME SHELL ========== */
+    .game-container{
+      max-width:1000px;
+      margin:-4.5rem auto 5rem;
+      padding:0 1.5rem;
+      position:relative;
+      z-index:10;
+    }
+
+    .game-card{
+      position:relative;
+      background:linear-gradient(180deg,#ffffff 0%, var(--steel-50) 100%);
+      border-radius:var(--radius-tray);
+      box-shadow:var(--shadow-tray);
+      border:1px solid var(--steel-200);
+      padding:2.75rem 2.5rem 2.5rem;
+      overflow:hidden;
+    }
+
+    .game-card::before{
+      content:'';
+      position:absolute; top:0; left:0; right:0; height:5px;
+      background:repeating-linear-gradient(135deg, var(--teal) 0 10px, var(--teal-deep) 10px 20px);
+    }
+
+    .game-screen{ display:none; }
+    .game-screen.active{ display:block; animation:screenIn .35s ease; }
+
+    /* ========== SETUP SCREEN ========== */
+    .setup-flow{ position:relative; padding-left:2.6rem; }
+    .setup-flow::before{
+      content:'';
+      position:absolute; left:.85rem; top:.35rem; bottom:2.6rem; width:2px;
+      background:repeating-linear-gradient(180deg, var(--steel-300) 0 6px, transparent 6px 12px);
+    }
+
+    .setup-group{ position:relative; margin-bottom:2.25rem; }
+
+    .step-marker{
+      position:absolute; left:-2.6rem; top:-.1rem;
+      width:1.8rem; height:1.8rem; border-radius:50%;
+      background:var(--teal-deep); color:#fff;
+      font-family:var(--font-tag); font-weight:700; font-size:.82rem;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 3px 8px rgba(13,80,102,.3);
+    }
+
+    .setup-group h3{
+      font-family:var(--font-display);
+      color:var(--ink);
+      font-weight:700;
+      font-size:1.15rem;
+      margin-bottom:1rem;
+      display:flex; align-items:center; gap:.55rem;
+    }
+
+    .setup-group h3 i{ color:var(--teal); font-size:1rem; }
+
+    .setup-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
+      gap:.9rem;
+    }
+
+    .pill-checkbox, .pill-radio{ position:relative; }
+    .pill-checkbox input, .pill-radio input{
+      position:absolute; opacity:0; cursor:pointer; height:0; width:0;
+    }
+
+    .tray-slot{
+      position:relative;
+      display:flex; align-items:center; gap:.7rem;
+      background:linear-gradient(180deg,#fff, var(--steel-50));
+      border:1.5px solid var(--steel-200);
+      border-radius:14px;
+      padding:.85rem 1.05rem;
+      font-family:var(--font-display);
+      font-weight:600; font-size:.95rem;
+      color:var(--steel-700);
+      cursor:pointer;
+      transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+    }
+
+    .tray-slot .slot-icon{ color:var(--teal); font-size:1.05rem; width:1.1rem; text-align:center; flex-shrink:0; }
+    .tray-slot .code-badge{
+      font-family:var(--font-tag); font-size:.66rem; font-weight:700; letter-spacing:.04em;
+      color:var(--teal-deep); background:var(--teal-pale);
+      padding:.3rem .45rem; border-radius:6px; flex-shrink:0;
+      transition:background .2s ease, color .2s ease;
+    }
+    .tray-slot .count-num{
+      font-family:var(--font-tag); font-weight:700; font-size:1.3rem; color:var(--teal-deep);
+      flex-shrink:0; min-width:1.7rem; text-align:center;
+    }
+    .tray-slot .slot-text{ line-height:1.2; }
+
+    .tray-slot:hover{
+      border-color:var(--teal);
+      transform:translateY(-2px);
+      box-shadow:0 10px 22px -12px rgba(16,143,160,.4);
+    }
+
+    input:checked + .tray-slot{
+      border-color:var(--teal);
+      background:linear-gradient(180deg, var(--teal-pale), #fff);
+      color:var(--ink);
+      box-shadow:inset 0 0 0 1.5px var(--teal);
+    }
+    input:checked + .tray-slot .code-badge{ background:var(--teal); color:#fff; }
+
+    input:checked + .tray-slot::after{
+      content:'\f00c';
+      font-family:'Font Awesome 6 Free'; font-weight:900;
+      position:absolute; top:-7px; right:-7px;
+      width:20px; height:20px; border-radius:50%;
+      background:var(--sterile); color:#fff; font-size:.6rem;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 2px 6px rgba(0,0,0,.25);
+      animation:stampIn .25s ease;
+    }
+
+    input:focus-visible + .tray-slot{ outline:2px solid var(--teal-deep); outline-offset:2px; }
+
+    .start-zone{ text-align:center; margin-top:2.75rem; }
+    .pool-counter{
+      font-family:var(--font-tag); font-size:.8rem; color:var(--steel-600);
+      margin-bottom:1.1rem; letter-spacing:.02em; min-height:1.1em;
+    }
+    .pool-counter strong{ color:var(--teal-deep); }
+
+    /* ========== SHARED BUTTONS ========== */
+    .btn-action{
+      background:linear-gradient(135deg, var(--teal), var(--teal-deep));
+      color:#ffffff; border:none; border-radius:30px;
+      padding:1rem 2.5rem; font-size:1.05rem; font-weight:700;
+      font-family:var(--font-display); cursor:pointer;
+      display:inline-flex; align-items:center; gap:.75rem;
+      transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
+      box-shadow:0 10px 24px -8px rgba(16,143,160,.45);
+    }
+    .btn-action:hover{ transform:translateY(-2px); box-shadow:0 14px 30px -8px rgba(13,80,102,.5); filter:brightness(1.05); }
+    .btn-action:active{ transform:translateY(0); }
+
+    .btn-secondary{
+      background:var(--steel-100); color:var(--steel-700);
+      border:1px solid var(--steel-300); border-radius:30px;
+      padding:.75rem 1.5rem; font-weight:600; font-family:var(--font-display);
+      cursor:pointer; transition:background .2s ease, color .2s ease, transform .2s ease;
+    }
+    .btn-secondary:hover{ background:var(--steel-200); color:var(--ink); transform:translateY(-1px); }
+
+    .btn-action:focus-visible, .btn-secondary:focus-visible{ outline:2px solid var(--teal-deep); outline-offset:3px; }
+
+    /* ========== GAMEPLAY HUD ========== */
+    .game-header-bar{
+      display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; gap:1rem; flex-wrap:wrap;
+    }
+
+    .hud-tag{
+      font-family:var(--font-tag); font-weight:600; font-size:.85rem;
+      background:var(--steel-100); border:1px solid var(--steel-200);
+      color:var(--teal-deep); padding:.5rem 1rem; border-radius:8px;
+      display:inline-flex; align-items:center; gap:.5rem;
+    }
+    .hud-tag i{ color:var(--teal); }
+    .hud-tag.flash{ animation:flashPulse .5s ease; }
+
+    .indicator-track{
+      position:relative; height:14px; border-radius:7px;
+      background:repeating-linear-gradient(135deg, var(--steel-200) 0 6px, var(--steel-100) 6px 12px);
+      border:1px solid var(--steel-300);
+      overflow:hidden; margin-bottom:2.25rem;
+      box-shadow:inset 0 2px 4px rgba(0,0,0,.08);
+    }
+    .indicator-fill{
+      position:relative; height:100%; width:0%;
+      background:linear-gradient(90deg, var(--teal), var(--teal-deep));
+      transition:width .45s cubic-bezier(.4,0,.2,1);
+    }
+    .indicator-fill::after{
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(110deg, transparent 30%, rgba(255,255,255,.4) 50%, transparent 70%);
+      background-size:200% 100%;
+      animation:shimmer 2.4s linear infinite;
+    }
+
+    /* ========== QUESTION STAGE ========== */
+    .question-stage{ animation:stageIn .4s cubic-bezier(.16,1,.3,1); }
+
+    .question-prompt{ text-align:center; margin-bottom:1.85rem; }
+    .q-eyebrow{
+      display:block; font-family:var(--font-tag); font-size:.7rem;
+      letter-spacing:.12em; text-transform:uppercase; color:var(--steel-600);
+      margin-bottom:.55rem;
+    }
+    .target-highlight{
+      display:inline-block; font-family:var(--font-display);
+      font-size:1.45rem; font-weight:800; color:var(--teal-deep);
+      background:var(--teal-pale); border:1px dashed var(--teal);
+      padding:.2rem .8rem; border-radius:8px;
+    }
+
+    /* Mode 1: Name -> Image Choices ("foam tray" cutout slots) */
+    .image-choices-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:1.25rem; }
+    @media (max-width:600px){ .image-choices-grid{ grid-template-columns:1fr; } }
+
+    .image-option-card{
+      position:relative;
+      background:linear-gradient(180deg, var(--steel-100), var(--steel-50));
+      border:1.5px solid var(--steel-200);
+      border-radius:16px;
+      padding:1.4rem;
+      cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      aspect-ratio:4/3;
+      transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+      overflow:hidden;
+    }
+    .image-option-card::before{
+      content:'';
+      position:absolute; inset:12px; border-radius:12px;
+      box-shadow:inset 0 6px 14px rgba(10,37,48,.18), inset 0 -2px 4px rgba(255,255,255,.6);
+      pointer-events:none;
+    }
+    .image-option-card .slot-tag{
+      position:absolute; top:9px; left:9px; z-index:2;
+      width:20px; height:20px; border-radius:5px;
+      background:#fff; border:1px solid var(--steel-300);
+      font-family:var(--font-tag); font-size:.65rem; font-weight:700; color:var(--steel-700);
+      display:flex; align-items:center; justify-content:center;
+    }
+    .image-option-card img{
+      position:relative; z-index:1;
+      max-width:100%; max-height:100%; object-fit:contain;
+      filter:drop-shadow(0 6px 10px rgba(10,37,48,.18));
+      transition:transform .25s ease;
+    }
+    .image-option-card:hover:not(.disabled){
+      transform:translateY(-4px); border-color:var(--teal);
+      box-shadow:0 16px 30px -16px rgba(16,143,160,.5);
+    }
+    .image-option-card:hover:not(.disabled) img{ transform:translateY(-2px) scale(1.04); }
+    .image-option-card:focus-visible{ outline:2px solid var(--teal-deep); outline-offset:3px; }
+
+    .fallback-icon{
+      position:relative; z-index:1;
+      display:flex; flex-direction:column; align-items:center; gap:.4rem;
+      color:var(--steel-300); font-size:1.7rem;
+    }
+    .fallback-icon em{
+      font-style:normal; font-family:var(--font-tag); font-size:.62rem;
+      color:var(--steel-600); letter-spacing:.03em;
+    }
+
+    .stamp-badge{
+      position:absolute; top:8px; right:8px; z-index:3;
+      width:28px; height:28px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:.85rem; color:#fff;
+      box-shadow:0 3px 8px rgba(0,0,0,.25);
+      animation:stampIn .3s ease;
+    }
+    .stamp-pass{ background:var(--sterile); }
+    .stamp-fail{ background:var(--alert); }
+
+    /* Mode 2: Image -> Name Choices ("specimen pouch" window) */
+    .specimen-window{
+      position:relative;
+      max-width:440px; height:300px; margin:0 auto 2rem;
+      background:linear-gradient(180deg,#fff, var(--steel-50));
+      border:1.5px solid var(--steel-200); border-radius:18px;
+      display:flex; align-items:center; justify-content:center;
+      padding:2rem 1.5rem 1.5rem;
+      box-shadow:inset 0 4px 10px rgba(10,37,48,.06);
+    }
+    .specimen-window::before{
+      content:'';
+      position:absolute; top:0; left:16px; right:16px; height:8px;
+      background:repeating-linear-gradient(45deg, var(--teal) 0 6px, var(--teal-deep) 6px 12px);
+      border-radius:0 0 4px 4px;
+      opacity:.85;
+    }
+    .specimen-window .tag-label{
+      position:absolute; top:16px; left:16px;
+      font-family:var(--font-tag); font-size:.62rem; letter-spacing:.08em;
+      color:var(--steel-600); background:var(--steel-100);
+      padding:.25rem .5rem; border-radius:5px; border:1px solid var(--steel-200);
+      z-index:2;
+    }
+    .specimen-window img{
+      position:relative; z-index:1;
+      max-width:100%; max-height:100%; object-fit:contain;
+      filter:drop-shadow(0 8px 14px rgba(10,37,48,.18));
+    }
+
+    .text-choices-list{ display:flex; flex-direction:column; gap:.85rem; }
+
+    .text-option-btn{
+      position:relative;
+      background:#ffffff;
+      border:1.5px solid var(--steel-200);
+      border-radius:12px;
+      padding:1.05rem 1.25rem 1.05rem 2.75rem;
+      text-align:left; font-size:1.02rem; font-weight:600;
+      color:var(--ink); cursor:pointer;
+      font-family:var(--font-display);
+      transition:border-color .2s ease, background .2s ease, transform .2s ease, color .2s ease;
+      display:flex; justify-content:space-between; align-items:center; gap:.75rem;
+      width:100%;
+    }
+    .text-option-btn::before{
+      content:'';
+      position:absolute; left:14px; top:50%; transform:translateY(-50%);
+      width:10px; height:10px; border-radius:50%;
+      background:var(--steel-50); border:1.5px solid var(--steel-300);
+      box-shadow:inset 0 1px 2px rgba(0,0,0,.15);
+    }
+    .text-option-btn:hover:not(.disabled){
+      border-color:var(--teal); background:var(--teal-pale); transform:translateX(4px);
+    }
+    .text-option-btn:focus-visible{ outline:2px solid var(--teal-deep); outline-offset:2px; }
+    .option-hint-icon{ opacity:.35; color:var(--steel-600); }
+
+    /* Correct / Incorrect states */
+    .correct{
+      border-color:var(--sterile) !important;
+      background:var(--sterile-pale) !important;
+      color:var(--sterile-text) !important;
+      animation:popCorrect .35s ease;
+    }
+    .incorrect{
+      border-color:var(--alert) !important;
+      background:var(--alert-pale) !important;
+      color:var(--alert-text) !important;
+      animation:shakeWrong .4s ease;
+    }
+    .disabled{ pointer-events:none; opacity:.85; }
+
+    /* ========== ACTION FOOTER ========== */
+    .action-footer{
+      display:flex; justify-content:space-between; align-items:center;
+      margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid var(--steel-200);
+    }
+    #next-btn{
+      visibility:hidden; opacity:0; transform:translateX(6px);
+      transition:opacity .25s ease, transform .25s ease;
+    }
+    #next-btn.show{ visibility:visible; opacity:1; transform:translateX(0); }
+
+    /* ========== RESULT SCREEN ========== */
+    .result-top{ text-align:center; }
+    .result-heading{ margin-bottom:.5rem; }
+    .result-heading .q-eyebrow{ margin-bottom:.4rem; }
+    .result-heading h2{
+      font-family:var(--font-display); font-weight:800; color:var(--ink);
+      font-size:1.7rem; margin:0;
+    }
+
+    .gauge-wrap{ position:relative; width:260px; margin:1.25rem auto 0; }
+    .gauge-svg{ width:100%; height:auto; display:block; }
+    .gauge-svg .zone{ fill:none; stroke-width:14; stroke-linecap:butt; }
+    .zone-red{ stroke:var(--alert); }
+    .zone-amber{ stroke:var(--amber); }
+    .zone-green{ stroke:var(--sterile); }
+    .ticks line{ stroke:var(--steel-300); stroke-width:2; }
+    .needle-line{ stroke:var(--ink); stroke-width:4; stroke-linecap:round; }
+    .gauge-hub{ fill:var(--ink); stroke:#fff; stroke-width:2; }
+
+    .gauge-readout{ text-align:center; margin-top:.15rem; position:relative; z-index:2; }
+    .gauge-value{ font-family:var(--font-tag); font-size:2.1rem; font-weight:700; color:var(--ink); }
+    .gauge-unit{ font-family:var(--font-tag); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--steel-600); }
+
+    .rank-stamp{
+      display:inline-block;
+      font-family:var(--font-tag); font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+      padding:.85rem 1.4rem; border:3px double currentColor; border-radius:8px;
+      transform:rotate(-2deg);
+      font-size:.92rem; line-height:1.4;
+      margin:1.5rem 0 1rem;
+      max-width:480px;
+    }
+    .tier-pass{ color:var(--sterile-text); background:var(--sterile-pale); }
+    .tier-warn{ color:var(--amber-text); background:var(--amber-pale); }
+    .tier-fail{ color:var(--alert-text); background:var(--alert-pale); }
+
+    .score-fraction{ color:var(--steel-600); font-family:var(--font-tag); font-size:.85rem; margin:0 0 2rem; }
+
+    .result-actions{ display:flex; gap:1rem; justify-content:center; margin-bottom:3.5rem; flex-wrap:wrap; }
+
+    .result-review h3{
+      font-family:var(--font-display); font-weight:700; color:var(--ink);
+      font-size:1.05rem; margin-bottom:1.25rem;
+      display:flex; align-items:center; gap:.55rem;
+    }
+    .result-review h3 i{ color:var(--teal); }
+
+    .review-scroll{ overflow-x:auto; border-radius:12px; border:1px solid var(--steel-200); }
+    .review-table{ width:100%; border-collapse:separate; border-spacing:0; font-size:.92rem; }
+    .review-table thead th{
+      font-family:var(--font-tag); font-size:.68rem; letter-spacing:.08em; text-transform:uppercase;
+      color:var(--steel-600); background:var(--steel-100);
+      padding:.8rem 1rem; text-align:left; border-bottom:1px solid var(--steel-200);
+    }
+    .review-table tbody td{ padding:.75rem 1rem; border-bottom:1px solid var(--steel-100); vertical-align:middle; }
+    .review-table tbody tr:last-child td{ border-bottom:none; }
+    .review-table tbody tr:nth-child(even){ background:var(--steel-50); }
+    .cell-correct{ color:var(--sterile-text); font-weight:700; }
+    .cell-wrong{ color:var(--alert-text); font-weight:700; }
+
+    .code-badge{
+      font-family:var(--font-tag); font-size:.66rem; font-weight:700; letter-spacing:.04em;
+      color:var(--teal-deep); background:var(--teal-pale);
+      padding:.3rem .5rem; border-radius:6px; display:inline-block;
+    }
+
+    .thumb-frame{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:54px; height:54px;
+      background:linear-gradient(180deg, var(--steel-100), var(--steel-50));
+      border:1px solid var(--steel-200); border-radius:10px;
+      box-shadow:inset 0 3px 6px rgba(10,37,48,.12);
+    }
+    .review-thumbnail{ max-width:80%; max-height:80%; object-fit:contain; }
+    .thumb-frame .fallback-icon{ font-size:1.1rem; }
+
+    .review-perfect{
+      text-align:center; color:var(--sterile-text); font-weight:700;
+      padding:2.25rem 1rem; font-family:var(--font-display);
+    }
+
+    /* Preventing image drag and selections */
+    .no-drag {
+      -webkit-user-drag: none !important;
+      -webkit-user-select: none !important;
+      -moz-user-select: none !important;
+      -ms-user-select: none !important;
+      user-select: none !important;
+    }
+
+    /* Zoom trigger styles */
+    .zoom-trigger-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      z-index: 5;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--steel-300);
+      color: var(--teal-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s ease;
+    }
+    .zoom-trigger-btn:hover {
+      background: var(--teal);
+      color: #fff;
+      transform: scale(1.1);
+    }
+    .zoom-trigger-btn:focus-visible {
+      outline: 2px solid var(--teal-deep);
+      outline-offset: 1px;
+    }
+    /* Specific position adjustment for text-mode window */
+    .specimen-window .zoom-trigger-btn {
+      top: 14px;
+      right: 16px;
+    }
+
+    /* Zoom Modal Lightbox styles */
+    .zoom-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(10, 37, 48, 0.85);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .zoom-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+    .zoom-modal-content {
+      position: relative;
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: var(--radius-tray);
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+      transform: scale(0.9);
+      transition: transform 0.25s ease;
+    }
+    .zoom-modal.active .zoom-modal-content {
+      transform: scale(1);
+    }
+    .zoom-modal-close {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--teal-deep);
+      color: #fff;
+      border: 2px solid #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .zoom-modal-img {
+      max-width: 100%;
+      max-height: 70vh;
+      object-fit: contain;
+    }
+    .zoom-modal-caption {
+      margin-top: 1rem;
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--ink);
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    /* Technical Notice Accordion */
+    .tech-notice-container {
+      margin-top: 2rem;
+      text-align: left;
+      border-top: 1px dashed var(--steel-300);
+      padding-top: 1.5rem;
+    }
+    .tech-notice-trigger {
+      background: none;
+      border: none;
+      font-family: var(--font-tag);
+      font-size: 0.7rem;
+      color: var(--steel-600);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .tech-notice-trigger:hover {
+      background: var(--steel-100);
+      color: var(--ink);
+    }
+    .tech-notice-content {
+      display: none;
+      margin-top: 0.75rem;
+      padding: 1rem;
+      background: var(--steel-100);
+      border-left: 3px solid var(--steel-300);
+      border-radius: 4px;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      line-height: 1.5;
+      color: var(--steel-700);
+    }
+    .tech-notice-content code {
+      font-family: var(--font-tag);
+      background: var(--steel-200);
+      padding: 0.1rem 0.3rem;
+      border-radius: 3px;
+    }
+    .tech-notice-content.open {
+      display: block;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width:640px){
+      .game-card{ padding:2rem 1.25rem 1.75rem; }
+      .setup-flow{ padding-left:2.1rem; }
+      .step-marker{ left:-2.1rem; width:1.55rem; height:1.55rem; font-size:.72rem; }
+      .game-container{ padding:0 1rem; }
+      .gauge-wrap{ width:220px; }
+      .game-hero{ padding:3.25rem 1.25rem 6.5rem; }
+    }
+
+    /* ========== MOTION SAFETY ========== */
+    @media (prefers-reduced-motion: reduce){
+      *, *::before, *::after{
+        animation-duration:.001ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:.001ms !important;
+        scroll-behavior:auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/index.html" class="logo-container">
+    <img src="/assets/logoSolu.jpeg" alt="Solutechh — Medical Equipment Supply India" class="logo-img" width="70" height="70">
+    <div class="logo-text">
+      <h2>SOLUTECHH</h2>
+      <p>Advance Healthcare Solutions Provider</p>
+    </div>
+  </a>
+
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="nav-wrapper" id="navWrapper">
+    <button class="nav-close-btn" id="navCloseBtn" aria-label="Close menu">
+      <i class="fa-solid fa-times" aria-hidden="true"></i>
+    </button>
+    <nav aria-label="Main navigation">
+      <ul class="nav-list">
+        <li><a href="/index.html" class="nav-link">Home</a></li>
+        <li><a href="/products.html" class="nav-link">Products</a></li>
+        <li><a href="/services.html" class="nav-link active" aria-current="page">Services</a></li>
+        <li><a href="/about.html" class="nav-link">About Us</a></li>
+        <li><a href="/achievements.html" class="nav-link">Achievements</a></li>
+        <li><a href="/contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <div class="game-hero">
+    <div class="hero-inner">
+      <h1>Surgical Instrument Recognition</h1>
+      <p>Build tray-level precision. Identify ENT surgical instruments by sight and by name across Tympanoplasty, FESS, Rhinoplasty &amp; Septoplasty sets.</p>
+      <div class="hero-icons" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3 L14 21 M19 3 L10 21 M5 3 Q12 10 19 3"/></svg>
+        <span class="hero-icon-dot"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21 V9 Q6 3 12 3 Q18 3 18 9"/><circle cx="6" cy="21" r="1.3" fill="currentColor" stroke="none"/></svg>
+        <span class="hero-icon-dot"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4 Q4 14 12 14 Q20 14 20 4 M12 14 L12 21"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-container">
+    <div class="game-card">
+
+      <!-- ================= SCREEN 1: CONFIGURATION SETUP ================= -->
+      <div id="setup-screen" class="game-screen active">
+        <div class="setup-flow">
+
+          <div class="setup-group">
+            <div class="step-marker">01</div>
+            <h3><i class="fa-solid fa-gamepad"></i> Select Play Mode</h3>
+            <div class="setup-grid">
+              <label class="pill-radio">
+                <input type="radio" name="gameMode" value="name-to-img" checked>
+                <span class="tray-slot">
+                  <i class="fa-solid fa-image slot-icon"></i>
+                  <span class="slot-text">Name to Image</span>
+                </span>
+              </label>
+              <label class="pill-radio">
+                <input type="radio" name="gameMode" value="img-to-name">
+                <span class="tray-slot">
+                  <i class="fa-solid fa-font slot-icon"></i>
+                  <span class="slot-text">Image to Name</span>
+                </span>
+              </label>
+              <label class="pill-radio">
+                <input type="radio" name="gameMode" value="mixed">
+                <span class="tray-slot">
+                  <i class="fa-solid fa-shuffle slot-icon"></i>
+                  <span class="slot-text">Mixed Mode</span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="setup-group">
+            <div class="step-marker">02</div>
+            <h3><i class="fa-solid fa-tags"></i> Filter Instrument Categories</h3>
+            <div class="setup-grid">
+              <label class="pill-checkbox">
+                <input type="checkbox" name="categories" value="Tympanoplasty Set" checked>
+                <span class="tray-slot">
+                  <span class="code-badge">TYM</span>
+                  <span class="slot-text">Tympanoplasty Set</span>
+                </span>
+              </label>
+              <label class="pill-checkbox">
+                <input type="checkbox" name="categories" value="Fess Tray" checked>
+                <span class="tray-slot">
+                  <span class="code-badge">FES</span>
+                  <span class="slot-text">Fess Tray</span>
+                </span>
+              </label>
+              <label class="pill-checkbox">
+                <input type="checkbox" name="categories" value="Rhinoplasty Set" checked>
+                <span class="tray-slot">
+                  <span class="code-badge">RHI</span>
+                  <span class="slot-text">Rhinoplasty Set</span>
+                </span>
+              </label>
+              <label class="pill-checkbox">
+                <input type="checkbox" name="categories" value="Septoplasty Set" checked>
+                <span class="tray-slot">
+                  <span class="code-badge">SEP</span>
+                  <span class="slot-text">Septoplasty Set</span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="setup-group">
+            <div class="step-marker">03</div>
+            <h3><i class="fa-solid fa-list-ol"></i> Set Size of Assessment</h3>
+            <div class="setup-grid">
+              <label class="pill-radio">
+                <input type="radio" name="qCount" value="10" checked>
+                <span class="tray-slot">
+                  <span class="count-num">10</span>
+                  <span class="slot-text">Questions</span>
+                </span>
+              </label>
+              <label class="pill-radio">
+                <input type="radio" name="qCount" value="20">
+                <span class="tray-slot">
+                  <span class="count-num">20</span>
+                  <span class="slot-text">Questions</span>
+                </span>
+              </label>
+              <label class="pill-radio">
+                <input type="radio" name="qCount" value="30">
+                <span class="tray-slot">
+                  <span class="count-num">30</span>
+                  <span class="slot-text">Questions</span>
+                </span>
+              </label>
+              <label class="pill-radio">
+                <input type="radio" name="qCount" value="all">
+                <span class="tray-slot">
+                  <span class="count-num" style="font-size:1rem;">ALL</span>
+                  <span class="slot-text">Instruments</span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="start-zone">
+          <p class="pool-counter" id="pool-counter"></p>
+          <button class="btn-action" id="start-btn">
+            <i class="fa-solid fa-play"></i> Start Challenge
+          </button>
+
+          <div class="tech-notice-container">
+  <button type="button" class="tech-notice-trigger" id="tech-notice-toggle" aria-expanded="false" aria-controls="tech-notice-body">
+    <i class="fa-solid fa-code"></i> Developer Notes
+    <i class="fa-solid fa-chevron-down tech-notice-chevron"></i>
+  </button>
+  <div class="tech-notice-content" id="tech-notice-body">
+    <strong>How this runs</strong><br>
+    This quiz runs entirely in your browser because there's no backend. The instrument list, the correct answers, and the scoring logic all live in the page itself, which means anyone who opens devtools or view-source can see the answer key directly.
+    <br><br>
+    That's a known and accepted tradeoff, not an oversight: keeping everything client-side means no data leaves your browser, and it can work offline if you load the page. This is a self-study tool, not a locked-down exam  treat your score accordingly.
+  </div>
+</div>
+        </div>
+      </div>
+
+      <!-- ================= SCREEN 2: GAMEPLAY INTERFACE ================= -->
+      <div id="play-screen" class="game-screen">
+        <div class="game-header-bar">
+          <span class="hud-tag"><i class="fa-solid fa-list-ol"></i><span id="hud-index">Question 1 of 10</span></span>
+          <span class="hud-tag" id="hud-score-tag"><i class="fa-solid fa-star"></i><span id="hud-score">Score: 0</span></span>
+        </div>
+
+        <div class="indicator-track">
+          <div class="indicator-fill" id="progress-indicator"></div>
+        </div>
+
+        <div id="question-stage" class="question-stage">
+          <div class="question-prompt" id="prompt-container">
+            <!-- Text gets updated dynamically -->
+          </div>
+
+          <!-- Mode 1 Display: Show Text, Pick From 4 Image Options -->
+          <div id="image-mode-view" style="display: none;">
+            <div class="image-choices-grid" id="image-choices">
+              <!-- Dynamic choice cards inserted here -->
+            </div>
+          </div>
+
+          <!-- Mode 2 Display: Show 1 Image, Pick From 4 Name Buttons -->
+          <div id="text-mode-view" style="display: none;">
+            <div class="specimen-window">
+              <span class="tag-label">SPECIMEN</span>
+              <button class="zoom-trigger-btn" aria-label="Zoom specimen image" title="Zoom Specimen" id="specimen-zoom-btn">
+                <i class="fa-solid fa-magnifying-glass-plus"></i>
+              </button>
+              <img id="text-mode-target-img" src="" alt="Surgical Instrument" class="no-drag">
+            </div>
+            <div class="text-choices-list" id="text-choices">
+              <!-- Dynamic text options inserted here -->
+            </div>
+          </div>
+        </div>
+
+        <div class="action-footer">
+          <button class="btn-secondary" id="quit-btn">Quit Game</button>
+          <button class="btn-action" id="next-btn">
+            Next Question <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- ================= SCREEN 3: PERFORMANCE OUTCOME ================= -->
+      <div id="result-screen" class="game-screen">
+        <div class="result-top">
+          <div class="result-heading">
+            <span class="q-eyebrow">Assessment Complete</span>
+            <h2>Tray Inspection Report</h2>
+          </div>
+
+          <div class="gauge-wrap">
+            <svg viewBox="0 0 220 130" class="gauge-svg" aria-hidden="true">
+              <path d="M20,110 A90,90 0 0 1 64.92,32.1" class="zone zone-red"/>
+              <path d="M64.92,32.1 A90,90 0 0 1 154.84,31.96" class="zone zone-amber"/>
+              <path d="M154.84,31.96 A90,90 0 0 1 200,110" class="zone zone-green"/>
+              <g class="ticks">
+                <line x1="20" y1="110" x2="10" y2="110"/>
+                <line x1="46.36" y1="46.36" x2="39.29" y2="39.29"/>
+                <line x1="110" y1="20" x2="110" y2="10"/>
+                <line x1="173.64" y1="46.36" x2="180.71" y2="39.29"/>
+                <line x1="200" y1="110" x2="210" y2="110"/>
+              </g>
+              <g id="gauge-needle">
+                <line x1="110" y1="110" x2="110" y2="34" class="needle-line"/>
+              </g>
+              <circle cx="110" cy="110" r="9" class="gauge-hub"/>
+            </svg>
+            <div class="gauge-readout">
+              <div class="gauge-value" id="score-percent-val">0%</div>
+              <div class="gauge-unit">Accuracy</div>
+            </div>
+          </div>
+
+          <div class="rank-stamp" id="rank-display">Rank processing&hellip;</div>
+          <p class="score-fraction" id="score-fraction-val"></p>
+
+          <div class="result-actions">
+            <button class="btn-action" id="retry-btn">
+              <i class="fa-solid fa-rotate-left"></i> Play Again
+            </button>
+            <button class="btn-secondary" id="settings-btn">
+              Configure Settings
+            </button>
+          </div>
+        </div>
+
+        <div class="result-review">
+          <h3><i class="fa-solid fa-clipboard-list"></i> Incorrect Answer Review</h3>
+          <div class="review-scroll">
+            <table class="review-table">
+              <thead>
+                <tr>
+                  <th>Set</th>
+                  <th>Specimen</th>
+                  <th>Correct Name</th>
+                  <th>Your Guess</th>
+                </tr>
+              </thead>
+              <tbody id="review-body">
+                <!-- Row records injected here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Zoom Lightbox Modal -->
+  <div id="zoom-lightbox" class="zoom-modal" role="dialog" aria-modal="true" aria-label="Expanded specimen view">
+    <div class="zoom-modal-content">
+      <button class="zoom-modal-close" id="zoom-close-btn" aria-label="Close expanded view">
+        <i class="fa-solid fa-times"></i>
+      </button>
+      <img id="zoom-modal-target-img" src="" alt="Expanded surgical specimen" class="zoom-modal-img no-drag">
+      <div id="zoom-modal-caption" class="zoom-modal-caption">Specimen View</div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="/assets/solutechh.png" alt="Solutechh logo" width="40" height="40" loading="lazy">
+          <span>SOLUTECHH</span>
+        </div>
+        <p>Medical equipment supply, installation &amp; maintenance for hospitals and institutions across India.</p>
+      </div>
+
+      <div class="footer-col">
+        <h5>Services</h5>
+        <a href="/services/cssd.html">CSSD Systems</a>
+        <a href="/services/modular.html">Modular OT</a>
+        <a href="/services/skill-labs.html">Skill Labs</a>
+        <a href="/services/pneumatic.html">Pneumatic Systems</a>
+        <a href="/services/emr.html">EMR Demo</a>
+      </div>
+
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="/index.html">Home</a>
+        <a href="/about.html">About Us</a>
+        <a href="/products.html">Products</a>
+        <a href="/achievements.html">Achievements</a>
+      </div>
+
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a href="mailto:solutechh@gmail.com">solutechh@gmail.com</a>
+        <a href="tel:+918879469955">+91 8879469955</a>
+        <span>C-412, Damji Shamji Corporate Square, Ghatkopar East,<br> Mumbai 400075</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="footerYear">2026</span> Solutechh. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile Header Toggles (Exact mapping from your configuration layout)
+  (function() {
+    var btn     = document.getElementById('menuBtn');
+    var wrapper = document.getElementById('navWrapper');
+    var close   = document.getElementById('navCloseBtn');
+    if (!btn) return;
+    btn.addEventListener('click', function() {
+      var open = wrapper.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open);
+    });
+    if (close) close.addEventListener('click', function() {
+      wrapper.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+  })();
+
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+  const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ================= SYSTEM SECURITY & LIGHTBOX SYSTEM =================
+  
+  // Neutralize context menu and asset-dragging to prevent open-in-new-tab exploits
+  document.addEventListener('contextmenu', (e) => {
+    if (e.target.classList.contains('no-drag') || e.target.closest('.game-card') || e.target.closest('.zoom-modal')) {
+      e.preventDefault();
+    }
+  });
+
+  document.addEventListener('dragstart', (e) => {
+    if (e.target.classList.contains('no-drag') || e.target.closest('.game-card')) {
+      e.preventDefault();
+    }
+  });
+
+  // Lightbox controller mechanisms
+  const lightbox = document.getElementById('zoom-lightbox');
+  const lightboxImg = document.getElementById('zoom-modal-target-img');
+  const lightboxCaption = document.getElementById('zoom-modal-caption');
+
+  function openZoomModal(src, caption) {
+    if (!src) return;
+    lightboxImg.src = src;
+    lightboxCaption.textContent = caption || "Specimen View";
+    lightbox.classList.add('active');
+  }
+
+  function closeZoomModal() {
+    lightbox.classList.remove('active');
+  }
+
+  document.getElementById('zoom-close-btn').addEventListener('click', closeZoomModal);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeZoomModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeZoomModal();
+  });
+
+  // Client-Side Runtime Accordion Trigger
+  const techToggle = document.getElementById('tech-notice-toggle');
+  const techBody = document.getElementById('tech-notice-body');
+  if (techToggle && techBody) {
+    techToggle.addEventListener('click', () => {
+      techBody.classList.toggle('open');
+    });
+  }
+
+  // ================= PRECISE INSTRUMENT DATA OBJECTS =================
+  const rawDataset = [
+    // Tympanoplasty
+    { src: "/assets/Tympno/Artery Forcep Mosquito Cur..jpg", name: "Artery Forcep Mosquito Cur.", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Artery Forcep Mosquito Str..jpg", name: "Artery Forcep Mosquito Str.", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Aural Speculum Hartmann.jpg", name: "Aural Speculum Hartmann", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Dissecting Forcep Adson Plain.jpg", name: "Dissecting Forcep Adson Plain", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Dissecting Forcep Adson Tooth.jpg", name: "Dissecting Forcep Adson Tooth", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Double-Ended Micro Ear ProbeCurette.jpg", name: "Double-Ended Micro Ear ProbeCurette", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/ENT Micro Ear Scissor.jpg", name: "ENT Micro Ear Scissor", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Freer Septum Elevator.jpg", name: "Freer Septum Elevator", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Micro Crocodile Ear Forceps.jpg", name: "Micro Crocodile Ear Forceps", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Micro Ear Cup Forceps.jpg", name: "Micro Ear Cup Forceps", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Micro Ear Curved Needle.jpg", name: "Micro Ear Curved Needle", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Micro Ear Flap Knife.jpg", name: "Micro Ear Flap Knife", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Micro Ear Hook blunt.jpg", name: "Micro Ear Hook blunt", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Micro Ear Oval Window Measuring Rod.jpg", name: "Micro Ear Oval Window Measuring Rod", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Micro Ear Sickle Knife.jpg", name: "Micro Ear Sickle Knife", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Micro Suction Cannula-rosen.jpg", name: "Micro Suction Cannula-rosen", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Needle Holder Small.jpg", name: "Needle Holder Small", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Periosteal Elevator Farabeuf cur..jpg", name: "Periosteal Elevator Farabeuf cur.", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/retractor Cat Paw.jpg", name: "retractor Cat Paw", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Retractor Lengenback.jpg", name: "Retractor Lengenback", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Retractor Mastoid 2x2pronge.jpg", name: "Retractor Mastoid 2x2pronge", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Retractor Mastoid 3x3prong.jpg", name: "Retractor Mastoid 3x3prong", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Sponge Holder.jpg", name: "Sponge Holder", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Suction Cannula Frizer.jpg", name: "Suction Cannula Frizer", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Thumb Control Suction Adapter.jpg", name: "Thumb Control Suction Adapter", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Towel Clip 8 shaped.jpg", name: "Towel Clip 8 shaped", category: "Tympanoplasty Set" },
+    { src: "/assets/Tympno/Towel Clip.jpg", name: "Towel Clip", category: "Tympanoplasty Set" },
+
+    // Fess
+    { src: "/assets/Fess/Antrum Punch Downword.jpg", name: "Antrum Punch Downword", category: "Fess Tray" },
+    { src: "/assets/Fess/Antrum Punch Upword.jpg", name: "Antrum Punch Upword", category: "Fess Tray" },
+    { src: "/assets/Fess/Antrum Punch.jpg", name: "Antrum Punch", category: "Fess Tray" },
+    { src: "/assets/Fess/Ballenger Nasal Cartilage Knife.jpg", name: "Ballenger Nasal Cartilage Knife", category: "Fess Tray" },
+    { src: "/assets/Fess/Cawthorne Scissors.jpg", name: "Cawthorne Scissors", category: "Fess Tray" },
+    { src: "/assets/Fess/Cushing Rongeur Downword.jpg", name: "Cushing Rongeur Downword", category: "Fess Tray" },
+    { src: "/assets/Fess/Double ended ball tip.jpg", name: "Double ended ball tip", category: "Fess Tray" },
+    { src: "/assets/Fess/ENT Micro Scissor.jpg", name: "ENT Micro Scissor", category: "Fess Tray" },
+    { src: "/assets/Fess/Nasal Curette.jpg", name: "Nasal Curette", category: "Fess Tray" },
+    { src: "/assets/Fess/Sikle Knife.jpg", name: "Sikle Knife", category: "Fess Tray" },
+    { src: "/assets/Fess/Thudichum Nasal Speculum.jpg", name: "Thudichum Nasal Speculum", category: "Fess Tray" },
+    { src: "/assets/Fess/Tonsil Dissector.jpg", name: "Tonsil Dissector", category: "Fess Tray" },
+    { src: "/assets/Fess/Tounge Depressor.jpg", name: "Tounge Depressor", category: "Fess Tray" },
+    { src: "/assets/Fess/Towel Clip cross.jpg", name: "Towel Clip cross", category: "Fess Tray" },
+    { src: "/assets/Fess/Towel Clip.jpg", name: "Towel Clip", category: "Fess Tray" },
+    { src: "/assets/Fess/Turbinectomy Scissors.jpg", name: "Turbinectomy Scissors", category: "Fess Tray" },
+
+    // Rhinoplasty
+    { src: "/assets/rhino/Cottle mallet.jpg", name: "Cottle mallet", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/EAR CURETTE, ANGLED, BLUNT.jpg", name: "EAR CURETTE, ANGLED, BLUNT", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/ELEVATOR BALL TIP.jpg", name: "ELEVATOR BALL TIP", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Elevator Double Ended.jpg", name: "Elevator Double Ended", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Eye Suction.jpg", name: "Eye Suction", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/FREER SEPARATOR & ELEVATOR. DOUBLE ENDED.jpg", name: "FREER SEPARATOR & ELEVATOR. DOUBLE ENDED", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/IRWIN MOORE THYROID CLAMP.jpg", name: "IRWIN MOORE THYROID CLAMP", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Jansen-Middleton Septum Forceps.jpg", name: "Jansen-Middleton Septum Forceps", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/JENKINS GOUGE.jpg", name: "JENKINS GOUGE", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Joseph Nasal Saw.jpg", name: "Joseph Nasal Saw", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/KILLENS GAUGE ST.jpg", name: "KILLENS GAUGE ST", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Killian Septum Gouge Bayonet shaped.jpg", name: "Killian Septum Gouge Bayonet shaped", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Knife Ballinger Swivel.jpg", name: "Knife Ballinger Swivel", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/KNIFE STAPEDIUS TENDON CUTTING. (2).jpg", name: "KNIFE STAPEDIUS TENDON CUTTING. (2)", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/KNIFE STAPEDIUS TENDON CUTTING..jpg", name: "KNIFE STAPEDIUS TENDON CUTTING.", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/KNIFE STAPEDIUS TENDON CUTTING.jpg", name: "KNIFE STAPEDIUS TENDON CUTTING", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Lack's Tongue Depressor.jpg", name: "Lack's Tongue Depressor", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/LUC TURBINATE NASAL FORCEPS..jpg", name: "LUC TURBINATE NASAL FORCEPS.", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/LUC TURBINATE NASAL FORCEPS.jpg", name: "LUC TURBINATE NASAL FORCEPS", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Maltz Nasal Rasp bayonet-style.jpg", name: "Maltz Nasal Rasp bayonet-style", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Mastoid Gauge Bayonet shaped.jpg", name: "Mastoid Gauge Bayonet shaped", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Mastoid Gauge stright.jpg", name: "Mastoid Gauge stright", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Micro Osteotome.jpg", name: "Micro Osteotome", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Micro Scissor.jpg", name: "Micro Scissor", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/NASAL DISSECTING FORCEP ANGLED.jpg", name: "NASAL DISSECTING FORCEP ANGLED", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Nasal forcep.jpg", name: "Nasal forcep", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Nasal Retractor.jpg", name: "Nasal Retractor", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Osteotome. Straight 7inch..jpg", name: "Osteotome. Straight 7inch.", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Osteotomes. Straight 7inch.jpg", name: "Osteotomes. Straight 7inch", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Periosteal elevator.jpg", name: "Periosteal elevator", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Periostum Elevator.jpg", name: "Periostum Elevator", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Reduction walsham forcep.jpg", name: "Reduction walsham forcep", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Septum Forcep.jpg", name: "Septum Forcep", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Sponge holder 8 inch.jpg", name: "Sponge holder 8 inch", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Thompson Dissector..jpg", name: "Thompson Dissector.", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/THOMPSON NASAL SPECULUM.jpg", name: "THOMPSON NASAL SPECULUM", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Thomson Dissector.jpg", name: "Thomson Dissector", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Tounge depressor.jpg", name: "Tounge depressor", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Towel clip 4 inch.jpg", name: "Towel clip 4 inch", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/Towel Clip.jpg", name: "Towel Clip", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/WEIL-BLAKESLEY RONGEUR..jpg", name: "WEIL-BLAKESLEY RONGEUR.", category: "Rhinoplasty Set" },
+    { src: "/assets/rhino/WEIL-BLAKESLEY RONGEUR.jpg", name: "WEIL-BLAKESLEY RONGEUR", category: "Rhinoplasty Set" },
+
+    // Septoplasty Set
+    { src: "/assets/septo/Ballenger Swivel Knife.jpg", name: "Ballenger Swivel Knife", category: "Septoplasty Set" },
+    { src: "/assets/septo/Bayonet-shaped Nasal Gouge.jpg", name: "Bayonet-shaped Nasal Gouge", category: "Septoplasty Set" },
+    { src: "/assets/septo/Diisecting Forcep Bayonet Shaped.jpg", name: "Diisecting Forcep Bayonet Shaped", category: "Septoplasty Set" },
+    { src: "/assets/septo/Dissecting forcep Bayonet shaped..jpg", name: "Dissecting forcep Bayonet shaped.", category: "Septoplasty Set" },
+    { src: "/assets/septo/Double Ended Elevator.jpg", name: "Double Ended Elevator", category: "Septoplasty Set" },
+    { src: "/assets/septo/Hartmann's Eustachian Catheter.jpg", name: "Hartmann's Eustachian Catheter", category: "Septoplasty Set" },
+    { src: "/assets/septo/Heymann Nasal Scissors.jpg", name: "Heymann Nasal Scissors", category: "Septoplasty Set" },
+    { src: "/assets/septo/Jansen-Middleton Septum Punch.jpg", name: "Jansen-Middleton Septum Punch", category: "Septoplasty Set" },
+    { src: "/assets/septo/Jobson Horne Probe..jpg", name: "Jobson Horne Probe.", category: "Septoplasty Set" },
+    { src: "/assets/septo/Killian Nasal Gouge.jpg", name: "Killian Nasal Gouge", category: "Septoplasty Set" },
+    { src: "/assets/septo/Luc Forcep.jpg", name: "Luc Forcep", category: "Septoplasty Set" },
+    { src: "/assets/septo/Nasal Bone File.jpg", name: "Nasal Bone File", category: "Septoplasty Set" },
+    { src: "/assets/septo/Nasal Chisel..jpg", name: "Nasal Chisel.", category: "Septoplasty Set" },
+    { src: "/assets/septo/Nasal Chisel.jpg", name: "Nasal Chisel", category: "Septoplasty Set" },
+    { src: "/assets/septo/Nasal Micro Scissor.jpg", name: "Nasal Micro Scissor", category: "Septoplasty Set" },
+    { src: "/assets/septo/Nasal Osteotome..jpg", name: "Nasal Osteotome..", category: "Septoplasty Set" },
+    { src: "/assets/septo/Nasal Osteotome.jpg", name: "Nasal Osteotome.", category: "Septoplasty Set" },
+    { src: "/assets/septo/Nasal Osteotome.jpg", name: "Nasal Osteotome", category: "Septoplasty Set" },
+    { src: "/assets/septo/Sponge Holder.jpg", name: "Sponge Holder", category: "Septoplasty Set" },
+    { src: "/assets/septo/Surgical Hammer.jpg", name: "Surgical Hammer", category: "Septoplasty Set" },
+    { src: "/assets/septo/Tally Nasal Forcep.jpg", name: "Tally Nasal Forcep", category: "Septoplasty Set" },
+    { src: "/assets/septo/Thudichum Nasal Speculum.jpg", name: "Thudichum Nasal Speculum", category: "Septoplasty Set" },
+    { src: "/assets/septo/Tounge Depressor.jpg", name: "Tounge Depressor", category: "Septoplasty Set" },
+    { src: "/assets/septo/Towel Clip.jpg", name: "Towel Clip", category: "Septoplasty Set" }
+  ];
+
+  // Helper: Shuffler
+  function shuffle(array) {
+    let m = array.length, t, i;
+    while (m) {
+      i = Math.floor(Math.random() * m--);
+      t = array[m];
+      array[m] = array[i];
+      array[i] = t;
+    }
+    return array;
+  }
+
+  // Helper: short tray code used on setup chips and review table
+  function categoryCode(name) {
+    const map = {
+      'Tympanoplasty Set': 'TYM',
+      'Fess Tray': 'FES',
+      'Rhinoplasty Set': 'RHI',
+      'Septoplasty Set': 'SEP'
+    };
+    return map[name] || name.slice(0, 3).toUpperCase();
+  }
+
+  // Helper: gracefully degrade broken/missing instrument photos
+  function handleImgError(imgEl) {
+    imgEl.onerror = null;
+    imgEl.style.display = 'none';
+    const wrap = imgEl.parentElement;
+    if (wrap) {
+      const zoomBtn = wrap.querySelector('.zoom-trigger-btn');
+      if (zoomBtn) zoomBtn.style.display = 'none';
+      if (!wrap.querySelector('.fallback-icon')) {
+        const span = document.createElement('span');
+        span.className = 'fallback-icon';
+        span.innerHTML = '<i class="fa-solid fa-image"></i><em>Image unavailable</em>';
+        wrap.appendChild(span);
+      }
+    }
+  }
+
+  // ================= GAMEPLAY CONTROLLER =================
+  let currentConfig = { mode: 'name-to-img', categories: [], maxQuestions: 10 };
+  let playSession = { pool: [], currentQuestion: 0, score: 0, history: [] };
+
+  const screens = {
+    setup: document.getElementById('setup-screen'),
+    play: document.getElementById('play-screen'),
+    result: document.getElementById('result-screen')
+  };
+
+  function switchScreen(target) {
+    Object.values(screens).forEach(scr => scr.classList.remove('active'));
+    screens[target].classList.add('active');
+  }
+
+  // Live feedback on the setup screen: how many instruments match the current filters
+  function refreshPoolCounter() {
+    const counterEl = document.getElementById('pool-counter');
+    const selectedCats = Array.from(document.querySelectorAll('input[name="categories"]:checked')).map(el => el.value);
+    if (selectedCats.length === 0) {
+      counterEl.innerHTML = 'Select at least one tray set to continue.';
+      return;
+    }
+    const count = rawDataset.filter(item => selectedCats.includes(item.category)).length;
+    counterEl.innerHTML = '<strong>' + count + '</strong> instrument' + (count !== 1 ? 's' : '') +
+      ' ready across ' + selectedCats.length + ' set' + (selectedCats.length !== 1 ? 's' : '') + ' selected';
+  }
+
+  document.querySelectorAll('input[name="categories"]').forEach(el => {
+    el.addEventListener('change', refreshPoolCounter);
+  });
+  refreshPoolCounter();
+
+  // Generate unique correct choices & distractors [1]
+  function generateOptions(target, fullPool, totalCount = 4) {
+    let options = [target];
+    let candidatePool = fullPool.filter(item => item.name !== target.name);
+
+    // Ensure uniqueness of names in options list [1]
+    let nameTracker = new Set([target.name]);
+    let shuffledCandidates = shuffle([...candidatePool]);
+
+    for (let candidate of shuffledCandidates) {
+      if (options.length >= totalCount) break;
+      if (!nameTracker.has(candidate.name)) {
+        options.push(candidate);
+        nameTracker.add(candidate.name);
+      }
+    }
+    return shuffle(options);
+  }
+
+  function startQuiz() {
+    // Collect Configuration
+    const selectedMode = document.querySelector('input[name="gameMode"]:checked').value;
+    const selectedCats = Array.from(document.querySelectorAll('input[name="categories"]:checked')).map(el => el.value);
+    const selectedQCount = document.querySelector('input[name="qCount"]:checked').value;
+
+    if (selectedCats.length === 0) {
+      alert("Please choose at least one surgical set category to generate the dataset.");
+      return;
+    }
+
+    currentConfig.mode = selectedMode;
+    currentConfig.categories = selectedCats;
+
+    // Filter instruments based on user selection
+    let filteredPool = rawDataset.filter(item => selectedCats.includes(item.category));
+    if (filteredPool.length === 0) {
+      alert("No matched instruments found in selected sets.");
+      return;
+    }
+
+    // Determine target size boundary
+    let targetSize = selectedQCount === 'all' ? filteredPool.length : parseInt(selectedQCount);
+    targetSize = Math.min(targetSize, filteredPool.length);
+    currentConfig.maxQuestions = targetSize;
+
+    // Reset gameplay trackers
+    playSession.pool = shuffle([...filteredPool]).slice(0, targetSize);
+    playSession.currentQuestion = 0;
+    playSession.score = 0;
+    playSession.history = [];
+
+    renderQuestion();
+    switchScreen('play');
+  }
+
+  function replayStageAnimation() {
+    const stage = document.getElementById('question-stage');
+    stage.classList.remove('question-stage');
+    void stage.offsetWidth; // force reflow so the animation replays
+    stage.classList.add('question-stage');
+  }
+
+  function renderQuestion() {
+    const questionIndex = playSession.currentQuestion;
+    const targetInstrument = playSession.pool[questionIndex];
+
+    // Reset HUD details
+    document.getElementById('hud-index').textContent = `Question ${questionIndex + 1} of ${currentConfig.maxQuestions}`;
+    document.getElementById('hud-score').textContent = `Score: ${playSession.score}`;
+
+    const progressPercent = ((questionIndex) / currentConfig.maxQuestions) * 100;
+    document.getElementById('progress-indicator').style.width = `${progressPercent}%`;
+
+    // Hide Next Button
+    const nextBtn = document.getElementById('next-btn');
+    nextBtn.classList.remove('show');
+
+    // Generate option list containing 1 correct answer and 3 unique distractors [1]
+    const options = generateOptions(targetInstrument, rawDataset);
+
+    // Resolve mode for Mixed setting
+    let activeMode = currentConfig.mode;
+    if (activeMode === 'mixed') {
+      activeMode = Math.random() > 0.5 ? 'name-to-img' : 'img-to-name';
+    }
+
+    // Setup active Views
+    const imgView = document.getElementById('image-mode-view');
+    const txtView = document.getElementById('text-mode-view');
+    const prompt = document.getElementById('prompt-container');
+
+    if (activeMode === 'name-to-img') {
+      imgView.style.display = 'block';
+      txtView.style.display = 'none';
+      prompt.innerHTML = `<span class="q-eyebrow">Find the matching image for</span><span class="target-highlight">${targetInstrument.name}</span>`;
+
+      // Render image option elements
+      const imgChoicesContainer = document.getElementById('image-choices');
+      imgChoicesContainer.innerHTML = '';
+
+      options.forEach((opt, i) => {
+        const card = document.createElement('div');
+        card.className = 'image-option-card';
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', 'Option ' + String.fromCharCode(65 + i));
+        
+        card.innerHTML = `
+          <span class="slot-tag">${String.fromCharCode(65 + i)}</span>
+          <button class="zoom-trigger-btn" aria-label="Zoom image option ${String.fromCharCode(65 + i)}" title="Zoom Specimen">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+          </button>
+          <img src="${opt.src}" alt="Option choice" class="no-drag" loading="lazy" onerror="handleImgError(this)">
+        `;
+
+        card.addEventListener('click', () => {
+          evaluateSelection(card, opt, targetInstrument, 'image-option-card');
+        });
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            card.click();
+          }
+        });
+
+        // Event isolation on option element to bypass choice triggers when zooming
+        const zoomBtn = card.querySelector('.zoom-trigger-btn');
+        if (zoomBtn) {
+          zoomBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openZoomModal(opt.src, "Specimen Option " + String.fromCharCode(65 + i));
+          });
+        }
+
+        imgChoicesContainer.appendChild(card);
+      });
+
+    } else {
+      imgView.style.display = 'none';
+      txtView.style.display = 'block';
+      prompt.innerHTML = `<span class="q-eyebrow">Identify the surgical tool shown below</span>`;
+
+      const targetImg = document.getElementById('text-mode-target-img');
+      targetImg.style.display = '';
+      const oldFallback = targetImg.parentElement.querySelector('.fallback-icon');
+      if (oldFallback) oldFallback.remove();
+      targetImg.onerror = function () { handleImgError(targetImg); };
+      targetImg.src = targetInstrument.src;
+
+      // Clean clone specimen zoom trigger to eliminate cumulative event bindings on static node
+      const specZoomBtn = document.getElementById('specimen-zoom-btn');
+      if (specZoomBtn) {
+        const newSpecZoomBtn = specZoomBtn.cloneNode(true);
+        specZoomBtn.parentNode.replaceChild(newSpecZoomBtn, specZoomBtn);
+        newSpecZoomBtn.addEventListener('click', () => {
+          // Pass a generic label instead of targetInstrument.name to preserve test integrity
+          openZoomModal(targetInstrument.src, "Specimen Close-up");
+        });
+      }
+
+      // Render text option buttons [1]
+      const textChoicesContainer = document.getElementById('text-choices');
+      textChoicesContainer.innerHTML = '';
+
+      options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'text-option-btn';
+        btn.innerHTML = `<span>${opt.name}</span> <i class="fa-solid fa-circle-question option-hint-icon"></i>`;
+
+        btn.addEventListener('click', () => {
+          evaluateSelection(btn, opt, targetInstrument, 'text-option-btn');
+        });
+        textChoicesContainer.appendChild(btn);
+      });
+    }
+
+    replayStageAnimation();
+
+    // Preserve metadata for history tracking
+    playSession.history.push({
+      target: targetInstrument,
+      selected: null,
+      wasCorrect: false,
+      modePlayed: activeMode
+    });
+  }
+
+  function addStamp(cardEl, correct) {
+    if (cardEl.querySelector('.stamp-badge')) return;
+    const badge = document.createElement('span');
+    badge.className = 'stamp-badge ' + (correct ? 'stamp-pass' : 'stamp-fail');
+    badge.innerHTML = correct ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-solid fa-xmark"></i>';
+    cardEl.appendChild(badge);
+  }
+
+  function flashScoreTag() {
+    const tag = document.getElementById('hud-score-tag');
+    tag.classList.remove('flash');
+    void tag.offsetWidth;
+    tag.classList.add('flash');
+  }
+
+  function evaluateSelection(clickedElement, selectedOption, target, classNamePrefix) {
+    const isCorrect = (selectedOption.name === target.name);
+    const activeHistoryIndex = playSession.currentQuestion;
+
+    playSession.history[activeHistoryIndex].selected = selectedOption;
+    playSession.history[activeHistoryIndex].wasCorrect = isCorrect;
+
+    // Evaluate score modification
+    if (isCorrect) {
+      playSession.score++;
+      clickedElement.classList.add('correct');
+      flashScoreTag();
+      if (classNamePrefix === 'text-option-btn') {
+        clickedElement.querySelector('i').className = 'fa-solid fa-circle-check option-hint-icon';
+      } else {
+        addStamp(clickedElement, true);
+      }
+    } else {
+      clickedElement.classList.add('incorrect');
+      if (classNamePrefix === 'text-option-btn') {
+        clickedElement.querySelector('i').className = 'fa-solid fa-circle-xmark option-hint-icon';
+      } else {
+        addStamp(clickedElement, false);
+      }
+    }
+
+    // Freeze all choices inside current container
+    document.querySelectorAll('.' + classNamePrefix).forEach(el => {
+      el.classList.add('disabled');
+
+      // Auto-Highlight correct option for incorrect attempts
+      if (!isCorrect) {
+        // Find option elements index using data or matching content
+        if (classNamePrefix === 'image-option-card') {
+          const imgEl = el.querySelector('img');
+          const imgUrl = imgEl ? imgEl.getAttribute('src') : null;
+          if (imgUrl === target.src) {
+            el.classList.add('correct');
+            addStamp(el, true);
+          }
+        } else {
+          const textSpanVal = el.querySelector('span').textContent;
+          if (textSpanVal === target.name) {
+            el.classList.add('correct');
+            el.querySelector('i').className = 'fa-solid fa-circle-check option-hint-icon';
+          }
+        }
+      }
+    });
+
+    // Update real-time scoreboard
+    document.getElementById('hud-score').textContent = `Score: ${playSession.score}`;
+
+    // Reveal next navigator
+    document.getElementById('next-btn').classList.add('show');
+  }
+
+  function nextStep() {
+    playSession.currentQuestion++;
+    if (playSession.currentQuestion < currentConfig.maxQuestions) {
+      renderQuestion();
+    } else {
+      finishGame();
+    }
+  }
+
+  function animateGauge(targetPercent) {
+    const needle = document.getElementById('gauge-needle');
+    const fromDeg = -90;
+    const toDeg = -90 + (targetPercent / 100) * 180;
+
+    if (REDUCE_MOTION) {
+      needle.setAttribute('transform', `rotate(${toDeg} 110 110)`);
+      return;
+    }
+
+    needle.setAttribute('transform', `rotate(${fromDeg} 110 110)`);
+    const duration = 1100;
+    const start = performance.now();
+
+    function tick(now) {
+      const elapsed = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - elapsed, 3);
+      const deg = fromDeg + (toDeg - fromDeg) * eased;
+      needle.setAttribute('transform', `rotate(${deg} 110 110)`);
+      if (elapsed < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function animateCountUp(target) {
+    const el = document.getElementById('score-percent-val');
+    if (REDUCE_MOTION) {
+      el.textContent = target + '%';
+      return;
+    }
+    const duration = 1100;
+    const start = performance.now();
+    function tick(now) {
+      const elapsed = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - elapsed, 3);
+      el.textContent = Math.round(target * eased) + '%';
+      if (elapsed < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function finishGame() {
+    // Generate Percentage Rating
+    const percentage = Math.round((playSession.score / currentConfig.maxQuestions) * 100);
+
+    animateGauge(percentage);
+    animateCountUp(percentage);
+
+    document.getElementById('score-fraction-val').textContent = `Final Score: ${playSession.score} / ${currentConfig.maxQuestions}`;
+
+    // Professional Rating Categorization
+    let evaluationMsg = "";
+    let tier = "";
+    if (percentage >= 90) {
+      evaluationMsg = "Master CSSD Specialist — exceptional structural accuracy.";
+      tier = 'tier-pass';
+    } else if (percentage >= 70) {
+      evaluationMsg = "Excellent performance. A few adjustments will sharpen accuracy.";
+      tier = 'tier-pass';
+    } else if (percentage >= 50) {
+      evaluationMsg = "Competent technician. Regular practice will establish mastery.";
+      tier = 'tier-warn';
+    } else {
+      evaluationMsg = "Apprentice tier. Spend more time studying the instrument catalogue.";
+      tier = 'tier-fail';
+    }
+    const rankEl = document.getElementById('rank-display');
+    rankEl.textContent = evaluationMsg;
+    rankEl.className = 'rank-stamp ' + tier;
+
+    // Compile Incorrect Answers Review Box
+    const tbody = document.getElementById('review-body');
+    tbody.innerHTML = '';
+
+    const errors = playSession.history.filter(record => !record.wasCorrect);
+
+    if (errors.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="4" class="review-perfect">Perfect score! No structural identification errors.</td></tr>`;
+    } else {
+      errors.forEach(record => {
+        const row = document.createElement('tr');
+        const userSelectedName = record.selected ? record.selected.name : 'Timed out / Skipped';
+
+        row.innerHTML = `
+          <td><span class="code-badge">${categoryCode(record.target.category)}</span></td>
+          <td><span class="thumb-frame"><img src="${record.target.src}" alt="${record.target.name}" class="review-thumbnail no-drag" onerror="handleImgError(this)"></span></td>
+          <td class="cell-correct">${record.target.name}</td>
+          <td class="cell-wrong">${userSelectedName}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    switchScreen('result');
+  }
+
+  // ================= EVENT LISTENER WRAPPERS =================
+  document.getElementById('start-btn').addEventListener('click', startQuiz);
+
+  document.getElementById('next-btn').addEventListener('click', nextStep);
+
+  document.getElementById('quit-btn').addEventListener('click', () => {
+    if (confirm("Are you sure you want to abandon the current study attempt? Your current score progress will be lost.")) {
+      switchScreen('setup');
+    }
+  });
+
+  document.getElementById('retry-btn').addEventListener('click', () => {
+    // Fast Restart using same configuration settings
+    let filteredPool = rawDataset.filter(item => currentConfig.categories.includes(item.category));
+    let targetSize = Math.min(currentConfig.maxQuestions, filteredPool.length);
+
+    playSession.pool = shuffle([...filteredPool]).slice(0, targetSize);
+    playSession.currentQuestion = 0;
+    playSession.score = 0;
+    playSession.history = [];
+
+    renderQuestion();
+    switchScreen('play');
+  });
+
+  document.getElementById('settings-btn').addEventListener('click', () => {
+    switchScreen('setup');
+  });
+
+</script>
+
+</body>
+</html>
