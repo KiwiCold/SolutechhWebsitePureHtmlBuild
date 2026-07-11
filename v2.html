@@ -835,6 +835,101 @@
       box-shadow: none;
     }
 
+    /* ========== FLASHCARD REFERENCE (Education Q&A structured data) ========== */
+    .flashcard-reference{
+      margin-top:3rem;
+      padding-top:2.5rem;
+      border-top:1px dashed var(--steel-300);
+    }
+    .ref-heading{
+      font-family:var(--font-display);
+      font-weight:800;
+      color:var(--ink);
+      font-size:1.35rem;
+      display:flex; align-items:center; gap:.6rem;
+      margin-bottom:.5rem;
+    }
+    .ref-heading i{ color:var(--teal); }
+    .ref-intro{
+      color:var(--steel-600);
+      font-size:.92rem;
+      line-height:1.6;
+      max-width:70ch;
+      margin-bottom:1.5rem;
+    }
+    .ref-category{
+      background:linear-gradient(180deg,#fff, var(--steel-50));
+      border:1.5px solid var(--steel-200);
+      border-radius:14px;
+      margin-bottom:1rem;
+      overflow:hidden;
+    }
+    .ref-category summary{
+      cursor:pointer;
+      list-style:none;
+      font-family:var(--font-display);
+      font-weight:700;
+      color:var(--ink);
+      padding:1rem 1.35rem;
+      display:flex; align-items:center; gap:.6rem;
+      transition:background .2s ease;
+    }
+    .ref-category summary::-webkit-details-marker{ display:none; }
+    .ref-category summary::before{
+      content:'\f105';
+      font-family:'Font Awesome 6 Free'; font-weight:900;
+      color:var(--teal); transition:transform .2s ease;
+      flex-shrink:0;
+    }
+    .ref-category[open] summary::before{ transform:rotate(90deg); }
+    .ref-category summary:hover{ background:var(--teal-pale); }
+    .ref-count{
+      font-family:var(--font-tag); font-weight:600; font-size:.78rem;
+      color:var(--steel-600);
+    }
+    .ref-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
+      gap:1rem;
+      padding:0 1.35rem 1.35rem;
+    }
+    .ref-card{
+      background:#fff;
+      border:1px solid var(--steel-200);
+      border-radius:12px;
+      padding:.9rem;
+      display:flex; flex-direction:column; gap:.55rem;
+    }
+    .ref-question{
+      font-size:.74rem;
+      color:var(--steel-600);
+      line-height:1.4;
+      margin:0;
+    }
+    .ref-img{
+      width:100%; aspect-ratio:4/3; object-fit:contain;
+      background:var(--steel-50);
+      border-radius:8px;
+      border:1px solid var(--steel-100);
+      padding:.4rem;
+    }
+    .ref-answer{
+      margin:0;
+      font-family:var(--font-display);
+      font-weight:700;
+      font-size:.88rem;
+      color:var(--ink);
+    }
+    .ref-answer-label{
+      font-family:var(--font-tag);
+      font-weight:600;
+      font-size:.68rem;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+      color:var(--sterile-text);
+      margin-right:.35rem;
+    }
+
     /* ========== RESPONSIVE ========== */
     @media (max-width:640px){
       .game-card{ padding:2rem 1.25rem 1.75rem; }
@@ -865,6 +960,1098 @@
   gtag('config', 'G-3RQZ0PBV8Z');
 </script>
 
+<!-- Education Q&A (Quiz) structured data — mirrors the visible
+     "ENT Instrument Flashcard Reference" section further down the page.
+     See: https://developers.google.com/search/docs/appearance/structured-data/education-qa -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Quiz",
+  "about": {
+    "@type": "Thing",
+    "name": "ENT Surgical Instrument Identification"
+  },
+  "educationalAlignment": [
+    {
+      "@type": "AlignmentObject",
+      "alignmentType": "educationalSubject",
+      "targetName": "Otolaryngology (ENT) Surgery / CSSD Instrument Training"
+    }
+  ],
+  "hasPart": [
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Artery Forcep Mosquito Cur."
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Artery Forcep Mosquito Str."
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Aural Speculum Hartmann"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Dissecting Forcep Adson Plain"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Dissecting Forcep Adson Tooth"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Double-Ended Micro Ear ProbeCurette"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ENT Micro Ear Scissor"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Freer Septum Elevator"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Micro Crocodile Ear Forceps"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Micro Ear Cup Forceps"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Micro Ear Curved Needle"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Micro Ear Flap Knife"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Micro Ear Hook blunt"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Micro Ear Oval Window Measuring Rod"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Micro Ear Sickle Knife"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Micro Suction Cannula-rosen"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Needle Holder Small"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Periosteal Elevator Farabeuf cur."
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "retractor Cat Paw"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Retractor Lengenback"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Retractor Mastoid 2x2pronge"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Retractor Mastoid 3x3prong"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sponge Holder"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Suction Cannula Frizer"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Thumb Control Suction Adapter"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Towel Clip 8 shaped"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Towel Clip"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Antrum Punch Downword"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Antrum Punch Upword"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Antrum Punch"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ballenger Nasal Cartilage Knife"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cawthorne Scissors"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cushing Rongeur Downword"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Double ended ball tip"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ENT Micro Scissor"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nasal Curette"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sikle Knife"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Thudichum Nasal Speculum"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tonsil Dissector"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tounge Depressor"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Towel Clip cross"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Towel Clip"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Turbinectomy Scissors"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cottle mallet"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "EAR CURETTE, ANGLED, BLUNT"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ELEVATOR BALL TIP"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Elevator Double Ended"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Eye Suction"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "FREER SEPARATOR & ELEVATOR. DOUBLE ENDED"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IRWIN MOORE THYROID CLAMP"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Jansen-Middleton Septum Forceps"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JENKINS GOUGE"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Joseph Nasal Saw"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "KILLENS GAUGE ST"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Killian Septum Gouge Bayonet shaped"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Knife Ballinger Swivel"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "KNIFE STAPEDIUS TENDON CUTTING. (2)"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "KNIFE STAPEDIUS TENDON CUTTING."
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "KNIFE STAPEDIUS TENDON CUTTING"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Lack's Tongue Depressor"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LUC TURBINATE NASAL FORCEPS."
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LUC TURBINATE NASAL FORCEPS"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Maltz Nasal Rasp bayonet-style"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mastoid Gauge Bayonet shaped"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mastoid Gauge stright"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Micro Osteotome"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "NASAL DISSECTING FORCEP ANGLED"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nasal forcep"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nasal Retractor"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Osteotome. Straight 7inch."
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Osteotomes. Straight 7inch"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Periosteal elevator"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Periostum Elevator"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Reduction walsham forcep"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Septum Forcep"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sponge holder 8 inch"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Thompson Dissector."
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "THOMPSON NASAL SPECULUM"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Thomson Dissector"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tounge depressor"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Towel clip 4 inch"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Towel Clip"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WEIL-BLAKESLEY RONGEUR."
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WEIL-BLAKESLEY RONGEUR"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ballenger Swivel Knife"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Bayonet-shaped Nasal Gouge"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Diisecting Forcep Bayonet Shaped"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Double Ended Elevator"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Hartmann's Eustachian Catheter"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Heymann Nasal Scissors"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Jansen-Middleton Septum Punch"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Jobson Horne Probe."
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Killian Nasal Gouge"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Luc Forcep"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nasal Bone File"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nasal Chisel."
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nasal Chisel"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nasal Micro Scissor"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nasal Osteotome.."
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nasal Osteotome."
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nasal Osteotome"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sponge Holder"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Surgical Hammer"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tally Nasal Forcep"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Thudichum Nasal Speculum"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tounge Depressor"
+      }
+    },
+    {
+      "@context": "https://schema.org/",
+      "@type": "Question",
+      "eduQuestionType": "Flashcard",
+      "text": "Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Towel Clip"
+      }
+    }
+  ]
+}
+  </script>
 </head>
 <body>
 
@@ -1204,6 +2391,568 @@
       <img id="zoom-modal-target-img" src="" alt="Expanded surgical specimen" class="zoom-modal-img no-drag">
       <div id="zoom-modal-caption" class="zoom-modal-caption">Specimen View</div>
     </div>
+  </div>
+
+  <div class="game-container">
+      <section class="flashcard-reference" id="flashcard-reference" aria-labelledby="flashcard-reference-heading">
+        <h2 id="flashcard-reference-heading" class="ref-heading"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> ENT Instrument Flashcard Reference</h2>
+        <p class="ref-intro">A complete, printable flashcard reference for every instrument used in the quiz above &mdash; organized by tray set. Expand a set to study the specimen photo, question, and correct instrument name.</p>
+        <details class="ref-category" id="ref-tympanoplasty-set">
+          <summary>Tympanoplasty Set <span class="ref-count">(27 instruments)</span></summary>
+          <div class="ref-grid">
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Artery Forcep Mosquito Cur..jpg" alt="Artery Forcep Mosquito Cur. &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Artery Forcep Mosquito Cur.</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Artery Forcep Mosquito Str..jpg" alt="Artery Forcep Mosquito Str. &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Artery Forcep Mosquito Str.</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Aural Speculum Hartmann.jpg" alt="Aural Speculum Hartmann &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Aural Speculum Hartmann</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Dissecting Forcep Adson Plain.jpg" alt="Dissecting Forcep Adson Plain &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Dissecting Forcep Adson Plain</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Dissecting Forcep Adson Tooth.jpg" alt="Dissecting Forcep Adson Tooth &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Dissecting Forcep Adson Tooth</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Double-Ended Micro Ear ProbeCurette.jpg" alt="Double-Ended Micro Ear ProbeCurette &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Double-Ended Micro Ear ProbeCurette</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/ENT Micro Ear Scissor.jpg" alt="ENT Micro Ear Scissor &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> ENT Micro Ear Scissor</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Freer Septum Elevator.jpg" alt="Freer Septum Elevator &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Freer Septum Elevator</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Micro Crocodile Ear Forceps.jpg" alt="Micro Crocodile Ear Forceps &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Micro Crocodile Ear Forceps</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Micro Ear Cup Forceps.jpg" alt="Micro Ear Cup Forceps &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Micro Ear Cup Forceps</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Micro Ear Curved Needle.jpg" alt="Micro Ear Curved Needle &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Micro Ear Curved Needle</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Micro Ear Flap Knife.jpg" alt="Micro Ear Flap Knife &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Micro Ear Flap Knife</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Micro Ear Hook blunt.jpg" alt="Micro Ear Hook blunt &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Micro Ear Hook blunt</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Micro Ear Oval Window Measuring Rod.jpg" alt="Micro Ear Oval Window Measuring Rod &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Micro Ear Oval Window Measuring Rod</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Micro Ear Sickle Knife.jpg" alt="Micro Ear Sickle Knife &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Micro Ear Sickle Knife</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Micro Suction Cannula-rosen.jpg" alt="Micro Suction Cannula-rosen &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Micro Suction Cannula-rosen</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Needle Holder Small.jpg" alt="Needle Holder Small &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Needle Holder Small</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Periosteal Elevator Farabeuf cur..jpg" alt="Periosteal Elevator Farabeuf cur. &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Periosteal Elevator Farabeuf cur.</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/retractor Cat Paw.jpg" alt="retractor Cat Paw &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> retractor Cat Paw</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Retractor Lengenback.jpg" alt="Retractor Lengenback &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Retractor Lengenback</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Retractor Mastoid 2x2pronge.jpg" alt="Retractor Mastoid 2x2pronge &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Retractor Mastoid 2x2pronge</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Retractor Mastoid 3x3prong.jpg" alt="Retractor Mastoid 3x3prong &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Retractor Mastoid 3x3prong</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Sponge Holder.jpg" alt="Sponge Holder &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Sponge Holder</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Suction Cannula Frizer.jpg" alt="Suction Cannula Frizer &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Suction Cannula Frizer</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Thumb Control Suction Adapter.jpg" alt="Thumb Control Suction Adapter &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Thumb Control Suction Adapter</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Towel Clip 8 shaped.jpg" alt="Towel Clip 8 shaped &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Towel Clip 8 shaped</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Tympanoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/Tympno/Towel Clip.jpg" alt="Towel Clip &mdash; Tympanoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Towel Clip</p>
+            </article>
+          </div>
+        </details>
+        <details class="ref-category" id="ref-fess-tray">
+          <summary>Fess Tray <span class="ref-count">(16 instruments)</span></summary>
+          <div class="ref-grid">
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?</p>
+              <img src="/assets/Fess/Antrum Punch Downword.jpg" alt="Antrum Punch Downword &mdash; Fess Tray" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Antrum Punch Downword</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?</p>
+              <img src="/assets/Fess/Antrum Punch Upword.jpg" alt="Antrum Punch Upword &mdash; Fess Tray" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Antrum Punch Upword</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?</p>
+              <img src="/assets/Fess/Antrum Punch.jpg" alt="Antrum Punch &mdash; Fess Tray" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Antrum Punch</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?</p>
+              <img src="/assets/Fess/Ballenger Nasal Cartilage Knife.jpg" alt="Ballenger Nasal Cartilage Knife &mdash; Fess Tray" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Ballenger Nasal Cartilage Knife</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?</p>
+              <img src="/assets/Fess/Cawthorne Scissors.jpg" alt="Cawthorne Scissors &mdash; Fess Tray" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Cawthorne Scissors</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?</p>
+              <img src="/assets/Fess/Cushing Rongeur Downword.jpg" alt="Cushing Rongeur Downword &mdash; Fess Tray" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Cushing Rongeur Downword</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?</p>
+              <img src="/assets/Fess/Double ended ball tip.jpg" alt="Double ended ball tip &mdash; Fess Tray" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Double ended ball tip</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?</p>
+              <img src="/assets/Fess/ENT Micro Scissor.jpg" alt="ENT Micro Scissor &mdash; Fess Tray" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> ENT Micro Scissor</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?</p>
+              <img src="/assets/Fess/Nasal Curette.jpg" alt="Nasal Curette &mdash; Fess Tray" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Nasal Curette</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?</p>
+              <img src="/assets/Fess/Sikle Knife.jpg" alt="Sikle Knife &mdash; Fess Tray" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Sikle Knife</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?</p>
+              <img src="/assets/Fess/Thudichum Nasal Speculum.jpg" alt="Thudichum Nasal Speculum &mdash; Fess Tray" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Thudichum Nasal Speculum</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?</p>
+              <img src="/assets/Fess/Tonsil Dissector.jpg" alt="Tonsil Dissector &mdash; Fess Tray" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Tonsil Dissector</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?</p>
+              <img src="/assets/Fess/Tounge Depressor.jpg" alt="Tounge Depressor &mdash; Fess Tray" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Tounge Depressor</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?</p>
+              <img src="/assets/Fess/Towel Clip cross.jpg" alt="Towel Clip cross &mdash; Fess Tray" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Towel Clip cross</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?</p>
+              <img src="/assets/Fess/Towel Clip.jpg" alt="Towel Clip &mdash; Fess Tray" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Towel Clip</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Fess Tray, is shown in this specimen photo?</p>
+              <img src="/assets/Fess/Turbinectomy Scissors.jpg" alt="Turbinectomy Scissors &mdash; Fess Tray" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Turbinectomy Scissors</p>
+            </article>
+          </div>
+        </details>
+        <details class="ref-category" id="ref-rhinoplasty-set">
+          <summary>Rhinoplasty Set <span class="ref-count">(41 instruments)</span></summary>
+          <div class="ref-grid">
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Cottle mallet.jpg" alt="Cottle mallet &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Cottle mallet</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/EAR CURETTE, ANGLED, BLUNT.jpg" alt="EAR CURETTE, ANGLED, BLUNT &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> EAR CURETTE, ANGLED, BLUNT</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/ELEVATOR BALL TIP.jpg" alt="ELEVATOR BALL TIP &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> ELEVATOR BALL TIP</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Elevator Double Ended.jpg" alt="Elevator Double Ended &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Elevator Double Ended</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Eye Suction.jpg" alt="Eye Suction &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Eye Suction</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/FREER SEPARATOR &amp; ELEVATOR. DOUBLE ENDED.jpg" alt="FREER SEPARATOR &amp; ELEVATOR. DOUBLE ENDED &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> FREER SEPARATOR &amp; ELEVATOR. DOUBLE ENDED</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/IRWIN MOORE THYROID CLAMP.jpg" alt="IRWIN MOORE THYROID CLAMP &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> IRWIN MOORE THYROID CLAMP</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Jansen-Middleton Septum Forceps.jpg" alt="Jansen-Middleton Septum Forceps &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Jansen-Middleton Septum Forceps</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/JENKINS GOUGE.jpg" alt="JENKINS GOUGE &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> JENKINS GOUGE</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Joseph Nasal Saw.jpg" alt="Joseph Nasal Saw &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Joseph Nasal Saw</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/KILLENS GAUGE ST.jpg" alt="KILLENS GAUGE ST &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> KILLENS GAUGE ST</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Killian Septum Gouge Bayonet shaped.jpg" alt="Killian Septum Gouge Bayonet shaped &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Killian Septum Gouge Bayonet shaped</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Knife Ballinger Swivel.jpg" alt="Knife Ballinger Swivel &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Knife Ballinger Swivel</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/KNIFE STAPEDIUS TENDON CUTTING. (2).jpg" alt="KNIFE STAPEDIUS TENDON CUTTING. (2) &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> KNIFE STAPEDIUS TENDON CUTTING. (2)</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/KNIFE STAPEDIUS TENDON CUTTING..jpg" alt="KNIFE STAPEDIUS TENDON CUTTING. &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> KNIFE STAPEDIUS TENDON CUTTING.</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/KNIFE STAPEDIUS TENDON CUTTING.jpg" alt="KNIFE STAPEDIUS TENDON CUTTING &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> KNIFE STAPEDIUS TENDON CUTTING</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Lack&#x27;s Tongue Depressor.jpg" alt="Lack&#x27;s Tongue Depressor &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Lack&#x27;s Tongue Depressor</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/LUC TURBINATE NASAL FORCEPS..jpg" alt="LUC TURBINATE NASAL FORCEPS. &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> LUC TURBINATE NASAL FORCEPS.</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/LUC TURBINATE NASAL FORCEPS.jpg" alt="LUC TURBINATE NASAL FORCEPS &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> LUC TURBINATE NASAL FORCEPS</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Maltz Nasal Rasp bayonet-style.jpg" alt="Maltz Nasal Rasp bayonet-style &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Maltz Nasal Rasp bayonet-style</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Mastoid Gauge Bayonet shaped.jpg" alt="Mastoid Gauge Bayonet shaped &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Mastoid Gauge Bayonet shaped</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Mastoid Gauge stright.jpg" alt="Mastoid Gauge stright &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Mastoid Gauge stright</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Micro Osteotome.jpg" alt="Micro Osteotome &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Micro Osteotome</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/NASAL DISSECTING FORCEP ANGLED.jpg" alt="NASAL DISSECTING FORCEP ANGLED &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> NASAL DISSECTING FORCEP ANGLED</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Nasal forcep.jpg" alt="Nasal forcep &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Nasal forcep</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Nasal Retractor.jpg" alt="Nasal Retractor &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Nasal Retractor</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Osteotome. Straight 7inch..jpg" alt="Osteotome. Straight 7inch. &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Osteotome. Straight 7inch.</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Osteotomes. Straight 7inch.jpg" alt="Osteotomes. Straight 7inch &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Osteotomes. Straight 7inch</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Periosteal elevator.jpg" alt="Periosteal elevator &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Periosteal elevator</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Periostum Elevator.jpg" alt="Periostum Elevator &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Periostum Elevator</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Reduction walsham forcep.jpg" alt="Reduction walsham forcep &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Reduction walsham forcep</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Septum Forcep.jpg" alt="Septum Forcep &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Septum Forcep</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Sponge holder 8 inch.jpg" alt="Sponge holder 8 inch &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Sponge holder 8 inch</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Thompson Dissector..jpg" alt="Thompson Dissector. &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Thompson Dissector.</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/THOMPSON NASAL SPECULUM.jpg" alt="THOMPSON NASAL SPECULUM &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> THOMPSON NASAL SPECULUM</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Thomson Dissector.jpg" alt="Thomson Dissector &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Thomson Dissector</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Tounge depressor.jpg" alt="Tounge depressor &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Tounge depressor</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Towel clip 4 inch.jpg" alt="Towel clip 4 inch &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Towel clip 4 inch</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/Towel Clip.jpg" alt="Towel Clip &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Towel Clip</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/WEIL-BLAKESLEY RONGEUR..jpg" alt="WEIL-BLAKESLEY RONGEUR. &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> WEIL-BLAKESLEY RONGEUR.</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Rhinoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/rhino/WEIL-BLAKESLEY RONGEUR.jpg" alt="WEIL-BLAKESLEY RONGEUR &mdash; Rhinoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> WEIL-BLAKESLEY RONGEUR</p>
+            </article>
+          </div>
+        </details>
+        <details class="ref-category" id="ref-septoplasty-set">
+          <summary>Septoplasty Set <span class="ref-count">(23 instruments)</span></summary>
+          <div class="ref-grid">
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Ballenger Swivel Knife.jpg" alt="Ballenger Swivel Knife &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Ballenger Swivel Knife</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Bayonet-shaped Nasal Gouge.jpg" alt="Bayonet-shaped Nasal Gouge &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Bayonet-shaped Nasal Gouge</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Diisecting Forcep Bayonet Shaped.jpg" alt="Diisecting Forcep Bayonet Shaped &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Diisecting Forcep Bayonet Shaped</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Double Ended Elevator.jpg" alt="Double Ended Elevator &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Double Ended Elevator</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Hartmann&#x27;s Eustachian Catheter.jpg" alt="Hartmann&#x27;s Eustachian Catheter &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Hartmann&#x27;s Eustachian Catheter</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Heymann Nasal Scissors.jpg" alt="Heymann Nasal Scissors &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Heymann Nasal Scissors</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Jansen-Middleton Septum Punch.jpg" alt="Jansen-Middleton Septum Punch &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Jansen-Middleton Septum Punch</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Jobson Horne Probe..jpg" alt="Jobson Horne Probe. &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Jobson Horne Probe.</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Killian Nasal Gouge.jpg" alt="Killian Nasal Gouge &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Killian Nasal Gouge</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Luc Forcep.jpg" alt="Luc Forcep &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Luc Forcep</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Nasal Bone File.jpg" alt="Nasal Bone File &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Nasal Bone File</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Nasal Chisel..jpg" alt="Nasal Chisel. &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Nasal Chisel.</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Nasal Chisel.jpg" alt="Nasal Chisel &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Nasal Chisel</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Nasal Micro Scissor.jpg" alt="Nasal Micro Scissor &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Nasal Micro Scissor</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Nasal Osteotome..jpg" alt="Nasal Osteotome.. &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Nasal Osteotome..</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Nasal Osteotome.jpg" alt="Nasal Osteotome. &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Nasal Osteotome.</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Nasal Osteotome.jpg" alt="Nasal Osteotome &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Nasal Osteotome</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Sponge Holder.jpg" alt="Sponge Holder &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Sponge Holder</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Surgical Hammer.jpg" alt="Surgical Hammer &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Surgical Hammer</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Tally Nasal Forcep.jpg" alt="Tally Nasal Forcep &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Tally Nasal Forcep</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Thudichum Nasal Speculum.jpg" alt="Thudichum Nasal Speculum &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Thudichum Nasal Speculum</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Tounge Depressor.jpg" alt="Tounge Depressor &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Tounge Depressor</p>
+            </article>
+            <article class="ref-card">
+              <p class="ref-question">Which ENT surgical instrument, used in the Septoplasty Set, is shown in this specimen photo?</p>
+              <img src="/assets/septo/Towel Clip.jpg" alt="Towel Clip &mdash; Septoplasty Set" loading="lazy" class="ref-img no-drag" onerror="handleImgError(this)">
+              <p class="ref-answer"><span class="ref-answer-label">Answer:</span> Towel Clip</p>
+            </article>
+          </div>
+        </details>
+      </section>
   </div>
 
 </main>
